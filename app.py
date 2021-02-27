@@ -219,6 +219,106 @@ indi_crop = ['Aparência', 'Crescimento', 'Resistência à estresse',
                                    'Rendimento', 'Diversidade genética', 'Diversidade vegetal',
                                    'Diversidade natural circundante', 'Sistema de manejo '
                                    ]
+def radar_chart(
+    name1, name2 = None, name3 = None, name4 = None, name5 = None,
+    r1 = None, r2 = None, r3 = None, r4 = None, r5 = None,
+    theta = None
+    ):
+
+    fig = go.Figure()
+
+    if r2 == None and r3 == None and r4 == None and r5 == None: 
+        fig.add_trace(go.Scatterpolar(
+            r=r1, theta=theta,
+            name=name1,
+            )
+        )
+    elif r3 == None and r4 == None and r5 == None:
+        fig.add_trace(go.Scatterpolar(
+            r=r1, theta=theta,
+            name=name1,
+            )
+        )
+        fig.add_trace(go.Scatterpolar(
+            r=r2, theta=theta,
+            name=name2,
+            )
+        )
+
+    elif r4 == None and r5 == None:
+        fig.add_trace(go.Scatterpolar(
+            r=r1, theta=theta,
+            name=name1,
+            )
+        )
+        fig.add_trace(go.Scatterpolar(
+            r=r2, theta=theta,
+            name=name2,
+            )
+        )
+        fig.add_trace(go.Scatterpolar(
+            r=r3, theta=theta,
+            name=name3,
+            )
+        )
+    elif r5 == None:
+        fig.add_trace(go.Scatterpolar(
+            r=r1, theta=theta,
+            name=name1,
+            )
+        )
+        fig.add_trace(go.Scatterpolar(
+            r=r2, theta=theta,
+            name=name2,
+            )
+        )
+        fig.add_trace(go.Scatterpolar(
+            r=r3, theta=theta,
+            name=name3,
+            )
+        )
+        fig.add_trace(go.Scatterpolar(
+            r=r4, theta=theta,
+            name=name4,
+            )
+        )
+    else:
+        fig.add_trace(go.Scatterpolar(
+            r=r1, theta=theta,
+            name=name1,
+            )
+        )
+        fig.add_trace(go.Scatterpolar(
+            r=r2, theta=theta,
+            name=name2,
+            )
+        )
+        fig.add_trace(go.Scatterpolar(
+            r=r3, theta=theta,
+            name=name3,
+            )
+        )
+        fig.add_trace(go.Scatterpolar(
+            r=r4, theta=theta,
+            name=name4,
+            )
+        )
+        fig.add_trace(go.Scatterpolar(
+            r=r5, theta=theta,
+            name=name5,
+            )
+        )
+
+    fig.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True,
+                range=[0, 10]
+            ),
+        ),
+        showlegend=True
+    )
+    return fig
 
 # Initialise the app
 app = dash.Dash(
@@ -266,29 +366,6 @@ app.layout = html.Div(
                             color='primary',
                             inverse=True,
                         ),
-#-----------------------MANUAIS-CARD-------------------------------------------------------------------------------------
-                        # dbc.Card(
-                        #     [
-                        #         dbc.CardBody(
-                        #             [
-                        #                 html.H5("VISULIZAÇÃO INTERATIVA DE INDICADORES ", className="card-title"),
-                        #                 html.P(
-                        #                         "Para baixar o gráfico é só clicar no ícone de camêra, no gráfico."
-                        #                 ),
-                        #                 # dbc.Button(
-                        #                 #     "ESCOLHER", color="info", id="", className="mr-1"
-                        #                 # ),
-                        #                 # dbc.Button(
-                        #                 #     "CRIAR", color="info", id="", className="mr-1"
-                        #                 # ),
-                        #                 html.P(
-                        #                 ),
-                        #             ]
-                        #         ),
-                        #     ],
-                        #     color='primary',
-                        #     inverse=True
-                        # ),
                         html.P(),
 #-----------------------INDICADORES CARD--------------------------------------------------------------------------------
                         dbc.Card(
@@ -364,16 +441,13 @@ app.layout = html.Div(
                                                                                      adaptar ao seu agroecossistema.
                                                                                      Os artigos podem ser acessados pelos
                                                                                      links abaixo."""),
-                                                                            dbc.Badge("""Un método agroecológico rápido para 
-                                                                                      la evaluación de la sostenibilidad de cafetales""",
+                                                                            dbc.Badge("2002",
                                                                                       href='http://www.sidalc.net/repdoc/A2039e/A2039e.pdf',
                                                                                     color = 'dark',
 
                                                                             ),
                                                                             html.P(''),
-                                                                            dbc.Badge("""A Rapid, Farmer-Friendly Agroecological 
-                                                                                        Method to Estimate Soil Quality and
-                                                                                        Crop Health in Vineyard Systems""",
+                                                                            dbc.Badge("2004",
                                                                                       href='https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwjxi4jhv4rsAhWqHLkGHRbeBTAQFjACegQIBxAB&url=https%3A%2F%2Fwww.researchgate.net%2Fprofile%2FBruno_Borsari%2Fpost%2FWhat_are_the_significance_of_and_strategies_for_the_maintenance_of_soil_health_in_sustainable_agriculture_How_soil_health_can_be_assessed%2Fattachment%2F5ab9096fb53d2f0bba5a6098%2FAS%253A608445061427200%25401522076015312%2Fdownload%2FNicholls_2004_Rapid_farmer_friendly_agroecological_method.pdf&usg=AOvVaw3p24teZhLMmrry2jtKoHEv',
                                                                                 color='dark',
 
@@ -398,7 +472,7 @@ app.layout = html.Div(
                                 # SAÚDE DO CULTIVO
                                 dbc.Collapse(
                                     [
-                                        # UNPUT 1
+                                        # INPUT 1
                                         dbc.Card(
                                             dbc.CardBody(
                                                 [
@@ -565,12 +639,6 @@ app.layout = html.Div(
                                                             ),
                                                             html.P(''),
                                                             dbc.Button(
-                                                                'GERAR RADAR',
-                                                                id='show-crop-radar',
-                                                                color='success'
-                                                            ),
-                                                            html.P(''),
-                                                            dbc.Button(
                                                                 'ADICIONAR +1 ANÁLISE AO RADAR',
                                                                 id='add2-crop',
                                                                 color='success'
@@ -581,21 +649,7 @@ app.layout = html.Div(
                                             ),
                                             color='light'
                                         ),
-                                        # RADAR 1
-                                        dbc.Collapse(
-                                            [
-                                                dbc.Card(
-                                                    dbc.CardBody(
-                                                        [
-                                                            dcc.Graph(
-                                                                id='figure-crop'),
-                                                        ],
-                                                    ),
-                                                ),
-                                            ],
-                                            id='crop-radar1',
-                                        ),
-                                        # UNPUT 2
+                                        # INPUT 2
                                         dbc.Collapse(
                                             [
                                                 dbc.Card(
@@ -746,12 +800,6 @@ app.layout = html.Div(
                                                                     ),
                                                                     html.P(''),
                                                                     dbc.Button(
-                                                                        'GERAR RADAR',
-                                                                        id='show-crop-radar2',
-                                                                        color='success'
-                                                                    ),
-                                                                    html.P(''),
-                                                                    dbc.Button(
                                                                         'ADICIONAR +1 ANÁLISE AO RADAR',
                                                                         id='add3-crop',
                                                                         color='success'
@@ -765,21 +813,7 @@ app.layout = html.Div(
                                             ],
                                             id='crop-2',
                                         ),
-                                        # RADAR 2
-                                        dbc.Collapse(
-                                            [
-                                                dbc.Card(
-                                                    dbc.CardBody(
-                                                        [
-                                                            dcc.Graph(
-                                                                id='figure-crop2'),
-                                                        ],
-                                                    ),
-                                                ),
-                                            ],
-                                            id='crop-radar2',
-                                        ),
-                                        # UNPUT 3
+                                        # INPUT 3
                                         dbc.Collapse(
                                             [
                                                 dbc.Card(
@@ -930,8 +964,8 @@ app.layout = html.Div(
                                                                     ),
                                                                     html.P(''),
                                                                     dbc.Button(
-                                                                        'GERAR RADAR',
-                                                                        id='show-crop-radar3',
+                                                                        'ADICIONAR +1 ANÁLISE AO RADAR',
+                                                                        id='add4-crop',
                                                                         color='success'
                                                                     ),
                                                                 ],
@@ -943,26 +977,349 @@ app.layout = html.Div(
                                             ],
                                             id='crop-3',
                                         ),
-                                        # RADAR 3
+                                        # INPUT 4
                                         dbc.Collapse(
                                             [
                                                 dbc.Card(
                                                     dbc.CardBody(
                                                         [
-                                                            dcc.Graph(
-                                                                id='figure-crop3'),
+                                                            html.P(''),
+                                                            html.H2('Saúde da colheita (Análise 4)'),
+                                                            html.P(''),
+                                                            dbc.Form(
+                                                                [
+                                                                    html.Div(
+                                                                        'Dê um nome para essa análise:'
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='name-crop4',
+                                                                        type='text',
+                                                                        placeholder='Ex: Quintal(colheita)'
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            0]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='aparencia4',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            1]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='crescimento4',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            2]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='resistencia4',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            3]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='incidencia4',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            4]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='competicao4',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            5]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='rendimento4',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            6]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='genetica4',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            7]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='vegetal4',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            8]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='circundante4',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            9]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='manejo4',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''),
+                                                                    dbc.Button(
+                                                                        'ADICIONAR +1 ANÁLISE AO RADAR',
+                                                                        id='add5-crop',
+                                                                        color='success'
+                                                                    ),
+                                                                ],
+                                                            ),
                                                         ],
                                                     ),
+                                                    color='light',
                                                 ),
                                             ],
-                                            id='crop-radar3',
+                                            id='crop-4',
+                                        ),
+                                        # INPUT 5
+                                        dbc.Collapse(
+                                            [
+                                                dbc.Card(
+                                                    dbc.CardBody(
+                                                        [
+                                                            html.P(''),
+                                                            html.H2('Saúde da colheita (Análise 5)'),
+                                                            html.P(''),
+                                                            dbc.Form(
+                                                                [
+                                                                    html.Div(
+                                                                        'Dê um nome para essa análise:'
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='name-crop5',
+                                                                        type='text',
+                                                                        placeholder='Ex: Quintal(colheita)'
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            0]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='aparencia5',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            1]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='crescimento5',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            2]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='resistencia5',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            3]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='incidencia5',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            4]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='competicao5',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            5]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='rendimento5',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            6]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='genetica5',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            7]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='vegetal5',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            8]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='circundante5',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(
+                                                                        indi_nicholsaltieri_crop[
+                                                                            9]
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='manejo5',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                ],
+                                                            ),
+                                                        ],
+                                                    ),
+                                                    color='light',
+                                                ),
+                                            ],
+                                            id='crop-5',
+                                        ),
+                                        dbc.Button(
+                                            'GERAR RADAR',
+                                            id='show-crop-radar',
+                                            color='success',
+                                            block=True
+                                        ),
+                                        dbc.Card(
+                                            dbc.CardBody(
+                                                [
+                                                    dcc.Graph(
+                                                        id='figure-crop'
+                                                    ),
+                                                ],
+                                            ),
                                         ),
                                     ],
                                     id='nichols-altieri-crop'
                                 ),
                                 # QUALIDADE DO SOLO
                                 dbc.Collapse(
-                                    [
+                                    [   # INPUT DA 1ª ANÁLISE DE QUALIDADE DO SOLO
                                         dbc.Card(
                                             dbc.CardBody(
                                                 [
@@ -1108,12 +1465,6 @@ app.layout = html.Div(
                                                             ),
                                                             html.P(''),
                                                             dbc.Button(
-                                                                'GERAR RADAR',
-                                                                id='show-soil-radar',
-                                                                color='success'
-                                                            ),
-                                                            html.P(''),
-                                                            dbc.Button(
                                                                 'ADICIONAR +1 ANÁLISE AO RADAR',
                                                                 id='add2-soil',
                                                                 color='success'
@@ -1124,20 +1475,6 @@ app.layout = html.Div(
                                             ),
                                             color='light',
                                             inverse=False,
-                                        ),
-                                        # RADAR DE QUALIDADE DO SOLO 1
-                                        dbc.Collapse(
-                                            dbc.Card(
-                                                dbc.CardBody(
-                                                    [
-                                                        dcc.Graph(
-                                                            id='figure'
-                                                        ),
-                                                        html.P(),
-                                                    ],
-                                                ),
-                                            ),
-                                            id='soil-radar'
                                         ),
                                         # INPUT DA 2ª ANÁLISE DE QUALIDADE DO SOLO
                                         dbc.Collapse(
@@ -1267,12 +1604,6 @@ app.layout = html.Div(
                                                                         type='number',
                                                                         max=10,
                                                                         min=1
-                                                                    ),
-                                                                    html.P(''),
-                                                                    dbc.Button(
-                                                                        'GERAR RADAR',
-                                                                        id='show-soil-radar2',
-                                                                        color='success'
                                                                     ),
                                                                     html.P(''),
                                                                     dbc.Button(
@@ -1433,8 +1764,8 @@ app.layout = html.Div(
                                                                     ),
                                                                     html.P(''),
                                                                     dbc.Button(
-                                                                        'GERAR RADAR',
-                                                                        id='show-soil-radar3',
+                                                                        'ADICIONAR +1 ANÁLISE AO RADAR',
+                                                                        id='add4-soil',
                                                                         color='success'
                                                                     ),
                                                                 ],
@@ -1444,21 +1775,309 @@ app.layout = html.Div(
                                                     color='light',
                                                     inverse=False,
                                                 ),
-                                                dbc.Collapse(
-                                                    dbc.Card(
-                                                        dbc.CardBody(
-                                                            [
-                                                                dcc.Graph(
-                                                                    id='fig-soil-3'
-                                                                ),
-                                                            ],
-                                                        ),
-                                                    ),
-                                                    id='soil-radar3'
-                                                ),
                                             ],
                                             id='soil-3'
                                         ),
+                                        # INPUT DA 4ª ANÁLISE DE QUALIDADE DO SOLO
+                                        dbc.Collapse(
+                                            [
+                                                dbc.Card(
+                                                    dbc.CardBody(
+                                                        [
+                                                            html.P(''),
+                                                            html.H2('Qualidade do solo (Análise 4)'),
+                                                            html.P(''),
+                                                            dbc.Form(
+                                                                [
+                                                                    html.Div(
+                                                                        'Dê um nome para a análise:'
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='name-soil4',
+                                                                        type='text',
+                                                                        placeholder='Ex: Sem Feminismo não há agroecologia!!'
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[0]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='4soil1',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[1]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='4soil2',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[2]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='4soil3',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[3]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='4soil4',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[4]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='4soil5',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[5]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='4soil6',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[6]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='4soil7',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[7]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='4soil8',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[8]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='4soil9',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[9]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='4soil10',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''),
+                                                                    dbc.Button(
+                                                                        'ADICIONAR +1 ANÁLISE AO RADAR',
+                                                                        id='add5-soil',
+                                                                        color='success'
+                                                                    ),
+                                                                ],
+                                                            ),
+                                                        ],
+                                                    ),
+                                                    color='light',
+                                                    inverse=False,
+                                                ),
+                                            ],
+                                            id='soil-4'
+                                        ),
+                                        # INPUT DA 5ª ANÁLISE DE QUALIDADE DO SOLO
+                                        dbc.Collapse(
+                                            [
+                                                dbc.Card(
+                                                    dbc.CardBody(
+                                                        [
+                                                            html.P(''),
+                                                            html.H2('Qualidade do solo (Análise 5)'),
+                                                            html.P(''),
+                                                            dbc.Form(
+                                                                [
+                                                                    html.Div(
+                                                                        'Dê um nome para a análise:'
+                                                                    ),
+                                                                    dbc.Input(
+                                                                        id='name-soil5',
+                                                                        type='text',
+                                                                        placeholder='Ex: Sem Feminismo não há agroecologia!!'
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[0]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='5soil1',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[1]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='5soil2',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[2]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='5soil3',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[3]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='5soil4',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[4]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='5soil5',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[5]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='5soil6',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[6]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='5soil7',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[7]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='5soil8',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[8]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='5soil9',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                    html.P(''
+                                                                           ),
+                                                                    html.Div(indicadores[9]
+                                                                             ),
+                                                                    dbc.Input(
+                                                                        id='5soil10',
+                                                                        placeholder='de 1 à 10',
+                                                                        type='number',
+                                                                        max=10,
+                                                                        min=1
+                                                                    ),
+                                                                ],
+                                                            ),
+                                                        ],
+                                                    ),
+                                                    color='light',
+                                                    inverse=False,
+                                                ),
+                                            ],
+                                            id='soil-5'
+                                        ),
+                                        dbc.Button(
+                                            'GERAR RADAR',
+                                            id='show-soil-radar',
+                                            color='success',
+                                            block=True
+                                        ),
+                                        dbc.Card(
+                                            dbc.CardBody(
+                                                [
+                                                    dcc.Graph(
+                                                        id='soil-figure'
+                                                    ),
+                                                    html.P(),
+                                                    ],
+                                                ),
+                                        ),                                        # RADAR DE QUALIDADE DO SOLO 1                      
                                     ],
                                     id='nichols-altieri-soil'
                                 ),
@@ -1468,7 +2087,7 @@ app.layout = html.Div(
                         # CRIAR INDICADORES
                         dbc.Collapse(
                             [
-                                # INPUT 0
+                                # THETA INPUTS
                                 dbc.Card(
                                     dbc.CardBody(
                                         [
@@ -1519,495 +2138,782 @@ app.layout = html.Div(
                                     color='primary',
                                     inverse=True,
                                 ),
-                                # INPUT 1
+                                # RADAR CHART INPUTS
+                                # TRACE 1 INPUT
                                 dbc.Collapse(
                                     [
                                         dbc.Card(
                                             dbc.CardBody(
-                                                [
-                                                    dbc.Form(
-                                                        [
-                                                            html.P(),
-                                                            html.H3(id='method-name'),
-                                                            html.P(),
-                                                            html.Div(
-                                                                'Dê um nome para essa análise:'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='name_new',
-                                                                type='text',
-                                                                placeholder='Ex: Pasto(03/03/2023)'
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='new-1-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='new1',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='new-2-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='new2',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='new-3-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='new3',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='new-4-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='new4',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='new-5-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='new5',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='new-6-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='new6',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='new-7-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='new7',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='new-8-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='new8',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='new-9-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='new9',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='new-10-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='new10',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(),
-                                                            dbc.Button('GERAR RADAR', color='success',
-                                                                       id='show-new-radar'),
-                                                            html.P(),
-                                                            dbc.Button('ADICIONAR +1 ANÁLISE AO RADAR', color='success',
-                                                                       id='add-new-method2'),
-                                                        ],
-                                                    ),
-                                                ]
+                                                            [
+                                                                dbc.Form(
+                                                                    [
+                                                                        html.P(),
+                                                                        html.H3(id='method-name'),
+                                                                        html.P(),
+                                                                        html.Div(
+                                                                            'Dê um nome para essa análise:'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='name_new',
+                                                                            type='text',
+                                                                            placeholder='Ex: Pasto(03/03/2023)'
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='new-1-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='new1',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='new-2-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='new2',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='new-3-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='new3',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='new-4-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='new4',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='new-5-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='new5',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='new-6-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='new6',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='new-7-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='new7',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='new-8-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='new8',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='new-9-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='new9',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='new-10-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='new10',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),                                             
+                                                                        html.P(),
+                                                                        dbc.Button('ADICIONAR +1 ANÁLISE AO RADAR', color='success',
+                                                                                id='add-new-method2'),
+                                                                    ],
+                                                                ),
+                                                            ]
                                             ),
                                         ),
-                                        # RADAR 1
-                                        dbc.Collapse(
+                                            # TRACE 2 INPUT
+                                            dbc.Collapse(
+                                                [
+                                                    dbc.Card(
+                                                        dbc.CardBody(
+                                                            [
+                                                                dbc.Form(
+                                                                    [
+                                                                        html.P(),
+                                                                        html.H3(id='method-name2'),
+                                                                        html.P(),
+                                                                        html.Div('Dê um nome para essa análise:'),
+                                                                        dbc.Input(
+                                                                            id='name_new2',
+                                                                            type='text',
+                                                                            placeholder='Ex: Pasto(03/03/2023)'
+                                                                        ),
+                                                                        html.P(''),
+                                                                        html.Div(
+                                                                            id='2new-1-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='2new1',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='2new-2-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='2new2',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='2new-3-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='2new3',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='2new-4-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='2new4',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='2new-5-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='2new5',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='2new-6-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='2new6',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='2new-7-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='2new7',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='2new-8-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='2new8',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='2new-9-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='2new9',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='2new-10-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='2new10',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(),
+                                                                        dbc.Button('ADICIONAR +1 ANÁLISE AO RADAR', color='success',
+                                                                                id='add-new-method3'
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                            ]
+                                                        ),
+                                                    ),
+                                                    dbc.Collapse(
+                                                        dbc.Card(
+                                                            dbc.CardBody(
+                                                                [
+                                                                    dcc.Graph(
+                                                                        id='figure2-new'),
+                                                                ],
+                                                            ),
+                                                        ),
+                                                        id='new-radar2'
+                                                    ),
+                                                ],
+                                                id='maked2-method'
+                                            ),
+                                            # TRACE 3 INPUT
+                                            dbc.Collapse(
+                                                [
+                                                    dbc.Card(
+                                                        dbc.CardBody(
+                                                            [
+                                                                dbc.Form(
+                                                                    [
+                                                                        html.P(),
+                                                                        html.H3(id='method-name3'),
+                                                                        html.P(),
+                                                                        html.Div('Dê um nome para essa análise:'),
+                                                                        dbc.Input(
+                                                                            id='name_new3',
+                                                                            type='text',
+                                                                            placeholder='Ex: Pasto(03/03/2023)'
+                                                                        ),
+                                                                        html.P(''),
+                                                                        html.Div(
+                                                                            id='3new-1-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='3new1',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='3new-2-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='3new2',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='3new-3-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='3new3',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='3new-4-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='3new4',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='3new-5-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='3new5',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='3new-6-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='3new6',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='3new-7-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='3new7',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='3new-8-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='3new8',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='3new-9-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='3new9',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='3new-10-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='3new10',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(),
+                                                                        dbc.Button('ADICIONAR +1 ANÁLISE AO RADAR', color='success',
+                                                                                id='add-new-method4'
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                            ]
+                                                        ),
+                                                    ),
+                                                    # RADAR 3
+                                                    dbc.Collapse(
+                                                        dbc.Card(
+                                                            dbc.CardBody(
+                                                                [
+                                                                    dcc.Graph(
+                                                                        id='figure3-new'),
+                                                                ],
+                                                            ),
+                                                        ),
+                                                        id='new-radar3'
+                                                    ),
+                                                ],
+                                                id='maked3-method'
+                                            ),
+                                            # TRACE 4 INPUT
+                                            dbc.Collapse(
+                                                [
+                                                    dbc.Card(
+                                                        dbc.CardBody(
+                                                            [
+                                                                dbc.Form(
+                                                                    [
+                                                                        html.P(),
+                                                                        html.H3(id='method-name4'),
+                                                                        html.P(),
+                                                                        html.Div('Dê um nome para essa análise:'),
+                                                                        dbc.Input(
+                                                                            id='name_new4',
+                                                                            type='text',
+                                                                            placeholder='Ex: Pasto(03/03/2023)'
+                                                                        ),
+                                                                        html.P(''),
+                                                                        html.Div(
+                                                                            id='4new-1-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='4new1',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='4new-2-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='4new2',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='4new-3-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='4new3',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='4new-4-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='4new4',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='4new-5-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='4new5',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='4new-6-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='4new6',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='4new-7-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='4new7',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='4new-8-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='4new8',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='4new-9-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='4new9',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='4new-10-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='4new10',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(),
+                                                                        dbc.Button('ADICIONAR +1 ANÁLISE AO RADAR', color='success',
+                                                                                id='add-new-method5'
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                            ]
+                                                        ),
+                                                    ),
+                                                ],
+                                                id='maked4-method'
+                                            ),
+                                            # TRACE 5 INPUT
+                                            dbc.Collapse(
+                                                [
+                                                    dbc.Card(
+                                                        dbc.CardBody(
+                                                            [
+                                                                dbc.Form(
+                                                                    [
+                                                                        html.P(),
+                                                                        html.H3(id='method-name5'),
+                                                                        html.P(),
+                                                                        html.Div('Dê um nome para essa análise:'),
+                                                                        dbc.Input(
+                                                                            id='name_new5',
+                                                                            type='text',
+                                                                            placeholder='Ex: Pasto(03/03/2023)'
+                                                                        ),
+                                                                        html.P(''),
+                                                                        html.Div(
+                                                                            id='5new-1-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='5new1',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='5new-2-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='5new2',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='5new-3-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='5new3',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='5new-4-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='5new4',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='5new-5-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='5new5',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='5new-6-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='5new6',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='5new-7-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='5new7',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='5new-8-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='5new8',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='5new-9-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='5new9',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                        html.P(''
+                                                                            ),
+                                                                        html.Div(
+                                                                            id='5new-10-out'
+                                                                        ),
+                                                                        dbc.Input(
+                                                                            id='5new10',
+                                                                            placeholder='de 1 à 10',
+                                                                            type='number',
+                                                                            max=10,
+                                                                            min=1
+                                                                        ),
+                                                                    ],
+                                                                ),
+                                                            ]
+                                                        ),
+                                                    ),
+                                                ],
+                                                id='maked5-method'
+                                            ),
+                                            html.P(),
+                                            dbc.Button('GERAR RADAR', color='success', block=True,
+                                                    id='show-new-radar'
+                                            ),
+                                            # RADAR CHART OUTPUT
                                             dbc.Card(
                                                 dbc.CardBody(
                                                     [
-                                                        dcc.Graph(
-                                                            id='figure-new'),
+                                                    dcc.Graph(
+                                                        id='custom-figure', figure={}
+                                                        ),
                                                     ],
                                                 ),
-                                            ),
-                                            id='new-radar'
-                                        ),
+                                            ), 
                                     ],
-                                    id='maked-method'
+                                id='maked-method'
                                 ),
-                                # INPUT 2
-                                dbc.Collapse(
-                                    [
-                                        dbc.Card(
-                                            dbc.CardBody(
-                                                [
-                                                    dbc.Form(
-                                                        [
-                                                            html.P(),
-                                                            html.H3(id='method-name2'),
-                                                            html.P(),
-                                                            html.Div('Dê um nome para essa análise:'),
-                                                            dbc.Input(
-                                                                id='name_new2',
-                                                                type='text',
-                                                                placeholder='Ex: Pasto(03/03/2023)'
-                                                            ),
-                                                            html.P(''),
-                                                            html.Div(
-                                                                id='2new-1-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='2new1',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='2new-2-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='2new2',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='2new-3-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='2new3',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='2new-4-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='2new4',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='2new-5-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='2new5',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='2new-6-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='2new6',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='2new-7-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='2new7',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='2new-8-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='2new8',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='2new-9-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='2new9',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='2new-10-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='2new10',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(),
-                                                            dbc.Button('GERAR RADAR', color='success',
-                                                                       id='show-new-radar2'
-                                                            ),
-                                                            html.P(),
-                                                            dbc.Button('ADICIONAR +1 ANÁLISE AO RADAR', color='success',
-                                                                       id='add-new-method3'
-                                                            ),
-                                                        ],
-                                                    ),
-                                                ]
-                                            ),
-                                        ),
-                                        dbc.Collapse(
-                                            dbc.Card(
-                                                dbc.CardBody(
-                                                    [
-                                                        dcc.Graph(
-                                                            id='figure2-new'),
-                                                    ],
-                                                ),
-                                            ),
-                                            id='new-radar2'
-                                        ),
-                                    ],
-                                    id='maked2-method'
-                                ),
-                                # INPUT 3
-                                dbc.Collapse(
-                                    [
-                                        dbc.Card(
-                                            dbc.CardBody(
-                                                [
-                                                    dbc.Form(
-                                                        [
-                                                            html.P(),
-                                                            html.H3(id='method-name3'),
-                                                            html.P(),
-                                                            html.Div('Dê um nome para essa análise:'),
-                                                            dbc.Input(
-                                                                id='name_new3',
-                                                                type='text',
-                                                                placeholder='Ex: Pasto(03/03/2023)'
-                                                            ),
-                                                            html.P(''),
-                                                            html.Div(
-                                                                id='3new-1-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='3new1',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='3new-2-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='3new2',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='3new-3-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='3new3',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='3new-4-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='3new4',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='3new-5-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='3new5',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='3new-6-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='3new6',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='3new-7-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='3new7',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='3new-8-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='3new8',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='3new-9-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='3new9',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(''
-                                                                   ),
-                                                            html.Div(
-                                                                id='3new-10-out'
-                                                            ),
-                                                            dbc.Input(
-                                                                id='3new10',
-                                                                placeholder='de 1 à 10',
-                                                                type='number',
-                                                                max=10,
-                                                                min=1
-                                                            ),
-                                                            html.P(),
-                                                            dbc.Button('GERAR RADAR', color='success',
-                                                                       id='show-new-radar3'
-                                                            ),
-                                                        ],
-                                                    ),
-                                                ]
-                                            ),
-                                        ),
-                                        # RADAR 3
-                                        dbc.Collapse(
-                                            dbc.Card(
-                                                dbc.CardBody(
-                                                    [
-                                                        dcc.Graph(
-                                                            id='figure3-new'),
-                                                    ],
-                                                ),
-                                            ),
-                                            id='new-radar3'
-                                        ),
-                                    ],
-                                    id='maked3-method'
-                                ),
-
                             ],
                             id="new-method",
                         ),
@@ -2058,6 +2964,7 @@ app.layout = html.Div(
     Output('new-method', 'is_open'),
     [Input("new-method-button", "n_clicks")],
     [State("new-method", "is_open")],
+    prevent_initial_call=True
 )
 def open_new_method(n, is_open):
     if n:
@@ -2069,6 +2976,7 @@ def open_new_method(n, is_open):
     Output('maked-method', 'is_open'),
     [Input("save-new-method", "n_clicks")],
     [State("maked-method", "is_open")],
+    prevent_initial_call=True
 )
 def open_maked_method(n, is_open):
     if n:
@@ -2080,6 +2988,7 @@ def open_maked_method(n, is_open):
     Output('maked2-method', 'is_open'),
     [Input("add-new-method2", "n_clicks")],
     [State("maked2-method", "is_open")],
+    prevent_initial_call=True
 )
 def open_maked_method(n, is_open):
     if n:
@@ -2091,245 +3000,175 @@ def open_maked_method(n, is_open):
     Output('maked3-method', 'is_open'),
     [Input("add-new-method3", "n_clicks")],
     [State("maked3-method", "is_open")],
+    prevent_initial_call=True
 )
 def open_maked_method(n, is_open):
     if n:
         return not is_open
     return is_open
 
-# SHOW RADAR 1
+# INPUT 4
 @app.callback(
-    Output('new-radar', 'is_open'),
-    [Input("show-new-radar", "n_clicks")],
-    [State("new-radar", "is_open")],
+    Output('maked4-method', 'is_open'),
+    [Input("add-new-method4", "n_clicks")],
+    [State("maked4-method", "is_open")],
+    prevent_initial_call=True
 )
 def open_maked_method(n, is_open):
     if n:
         return not is_open
     return is_open
 
-# SHOW RADAR 2
+# INPUT 5
 @app.callback(
-    Output('new-radar2', 'is_open'),
-    [Input("show-new-radar2", "n_clicks")],
-    [State("new-radar2", "is_open")],
+    Output('maked5-method', 'is_open'),
+    [Input("add-new-method5", "n_clicks")],
+    [State("maked5-method", "is_open")],
+    prevent_initial_call=True
 )
 def open_maked_method(n, is_open):
     if n:
         return not is_open
     return is_open
 
-# SHOW RADAR 3
+# CUSTOM RADAR 
 @app.callback(
-    Output('new-radar3', 'is_open'),
-    [Input("show-new-radar3", "n_clicks")],
-    [State("new-radar3", "is_open")],
+    Output('custom-figure', 'figure'),
+    Input("show-new-radar", "n_clicks"),
+    [State('name_new', 'value'),
+     State('new1', 'value'),
+     State('new2', 'value'),
+     State('new3', 'value'),
+     State('new4', 'value'),
+     State('new5', 'value'),
+     State('new6', 'value'),
+     State('new7', 'value'),
+     State('new8', 'value'),
+     State('new9', 'value'),
+     State('new10', 'value'),
+     State('name_new2', 'value'),
+     State('2new1', 'value'),
+     State('2new2', 'value'),
+     State('2new3', 'value'),
+     State('2new4', 'value'),
+     State('2new5', 'value'),
+     State('2new6', 'value'),
+     State('2new7', 'value'),
+     State('2new8', 'value'),
+     State('2new9', 'value'),
+     State('2new10', 'value'),
+     State('name_new3', 'value'),
+     State('3new1', 'value'),
+     State('3new2', 'value'),
+     State('3new3', 'value'),
+     State('3new4', 'value'),
+     State('3new5', 'value'),
+     State('3new6', 'value'),
+     State('3new7', 'value'),
+     State('3new8', 'value'),
+     State('3new9', 'value'),
+     State('3new10', 'value'),
+     State('name_new4', 'value'),
+     State('4new1', 'value'),
+     State('4new2', 'value'),
+     State('4new3', 'value'),
+     State('4new4', 'value'),
+     State('4new5', 'value'),
+     State('4new6', 'value'),
+     State('4new7', 'value'),
+     State('4new8', 'value'),
+     State('4new9', 'value'),
+     State('4new10', 'value'),
+     State('name_new5', 'value'),
+     State('5new1', 'value'),
+     State('5new2', 'value'),
+     State('5new3', 'value'),
+     State('5new4', 'value'),
+     State('5new5', 'value'),
+     State('5new6', 'value'),
+     State('5new7', 'value'),
+     State('5new8', 'value'),
+     State('5new9', 'value'),
+     State('5new10', 'value'),
+
+     State('cria1', 'value'),
+     State('cria2', 'value'),
+     State('cria3', 'value'),
+     State('cria4', 'value'),
+     State('cria5', 'value'),
+     State('cria6', 'value'),
+     State('cria7', 'value'),
+     State('cria8', 'value'),
+     State('cria9', 'value'),
+     State('cria10', 'value'),
+     ],
+    prevent_initial_call=True
 )
-def open_maked_method(n, is_open):
-    if n:
-        return not is_open
-    return is_open
-
-# RADAR 1
-@app.callback(
-    Output('figure-new', 'figure'),
-    [Input('name_new', 'value'),
-     Input('new1', 'value'),
-     Input('new2', 'value'),
-     Input('new3', 'value'),
-     Input('new4', 'value'),
-     Input('new5', 'value'),
-     Input('new6', 'value'),
-     Input('new7', 'value'),
-     Input('new8', 'value'),
-     Input('new9', 'value'),
-     Input('new10', 'value'),
-     Input('cria1', 'value'),
-     Input('cria2', 'value'),
-     Input('cria3', 'value'),
-     Input('cria4', 'value'),
-     Input('cria5', 'value'),
-     Input('cria6', 'value'),
-     Input('cria7', 'value'),
-     Input('cria8', 'value'),
-     Input('cria9', 'value'),
-     Input('cria10', 'value'),
-     ]
-)
-def chart_crop_update (name1, ind11, ind21, ind31, ind41, ind51, ind61, ind71, ind81, ind91, ind101,
-                       out1, out2, out3, out4, out5, out6, out7, out8, out9, out10):
-    fig = go.Figure()
-
-    fig.add_trace(go.Scatterpolar(
-        r=[ind11, ind21, ind31, ind41, ind51, ind61, ind71, ind81, ind91, ind101],
-        theta=[out1, out2, out3, out4, out5, out6, out7, out8, out9, out10],
-        fill='toself',
-        name=name1,
-    ))
-
-    fig.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 10]
-            ),
-        ),
-        showlegend=True
-    )
-
-    return fig
-
-# RADAR 2
-@app.callback(
-    Output('figure2-new', 'figure'),
-    [Input('name_new', 'value'),
-     Input('new1', 'value'),
-     Input('new2', 'value'),
-     Input('new3', 'value'),
-     Input('new4', 'value'),
-     Input('new5', 'value'),
-     Input('new6', 'value'),
-     Input('new7', 'value'),
-     Input('new8', 'value'),
-     Input('new9', 'value'),
-     Input('new10', 'value'),
-     Input('name_new2', 'value'),
-     Input('2new1', 'value'),
-     Input('2new2', 'value'),
-     Input('2new3', 'value'),
-     Input('2new4', 'value'),
-     Input('2new5', 'value'),
-     Input('2new6', 'value'),
-     Input('2new7', 'value'),
-     Input('2new8', 'value'),
-     Input('2new9', 'value'),
-     Input('2new10', 'value'),
-     Input('cria1', 'value'),
-     Input('cria2', 'value'),
-     Input('cria3', 'value'),
-     Input('cria4', 'value'),
-     Input('cria5', 'value'),
-     Input('cria6', 'value'),
-     Input('cria7', 'value'),
-     Input('cria8', 'value'),
-     Input('cria9', 'value'),
-     Input('cria10', 'value'),
-     ]
-)
-def chart_crop_update (name1, ind11, ind21, ind31, ind41, ind51, ind61, ind71, ind81, ind91, ind101,
-                       name2, ind12, ind22, ind32, ind42, ind52, ind62, ind72, ind82, ind92, ind102,
-                       out1, out2, out3, out4, out5, out6, out7, out8, out9, out10):
-
-    fig = go.Figure()
-
-    fig.add_trace(go.Scatterpolar(
-        r=[ind11, ind21, ind31, ind41, ind51, ind61, ind71, ind81, ind91, ind101],
-        theta=[out1, out2, out3, out4, out5, out6, out7, out8, out9, out10],
-        fill='toself',
-        name= name1,
-    ))
-    fig.add_trace(go.Scatterpolar(
-        r=[ind12, ind22, ind32, ind42, ind52, ind62, ind72, ind82, ind92, ind102],
-        theta=[out1, out2, out3, out4, out5, out6, out7, out8, out9, out10],
-        fill='toself',
-        name= name2,
-    ))
-
-    fig.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 10]
-            ),
-        ),
-        showlegend=True
-    )
-
-    return fig
-
-# RADAR 3
-@app.callback(
-    Output('figure3-new', 'figure'),
-    [Input('name_new', 'value'),
-     Input('new1', 'value'),
-     Input('new2', 'value'),
-     Input('new3', 'value'),
-     Input('new4', 'value'),
-     Input('new5', 'value'),
-     Input('new6', 'value'),
-     Input('new7', 'value'),
-     Input('new8', 'value'),
-     Input('new9', 'value'),
-     Input('new10', 'value'),
-     Input('name_new2', 'value'),
-     Input('2new1', 'value'),
-     Input('2new2', 'value'),
-     Input('2new3', 'value'),
-     Input('2new4', 'value'),
-     Input('2new5', 'value'),
-     Input('2new6', 'value'),
-     Input('2new7', 'value'),
-     Input('2new8', 'value'),
-     Input('2new9', 'value'),
-     Input('2new10', 'value'),
-     Input('name_new3', 'value'),
-     Input('3new1', 'value'),
-     Input('3new2', 'value'),
-     Input('3new3', 'value'),
-     Input('3new4', 'value'),
-     Input('3new5', 'value'),
-     Input('3new6', 'value'),
-     Input('3new7', 'value'),
-     Input('3new8', 'value'),
-     Input('3new9', 'value'),
-     Input('3new10', 'value'),
-     Input('cria1', 'value'),
-     Input('cria2', 'value'),
-     Input('cria3', 'value'),
-     Input('cria4', 'value'),
-     Input('cria5', 'value'),
-     Input('cria6', 'value'),
-     Input('cria7', 'value'),
-     Input('cria8', 'value'),
-     Input('cria9', 'value'),
-     Input('cria10', 'value'),
-     ]
-)
-def chart_crop_update (name1, ind11, ind21, ind31, ind41, ind51, ind61, ind71, ind81, ind91, ind101,
+def custom_radar_graph (n, name1, ind11, ind21, ind31, ind41, ind51, ind61, ind71, ind81, ind91, ind101,
                        name2, ind12, ind22, ind32, ind42, ind52, ind62, ind72, ind82, ind92, ind102,
                        name3, ind13, ind23, ind33, ind43, ind53, ind63, ind73, ind83, ind93, ind103,
+                       name4, ind14, ind24, ind34, ind44, ind54, ind64, ind74, ind84, ind94, ind104,
+                       name5, ind15, ind25, ind35, ind45, ind55, ind65, ind75, ind85, ind95, ind105,
                        out1, out2, out3, out4, out5, out6, out7, out8, out9, out10):
 
-    fig = go.Figure()
+    theta = [out1, out2, out3, out4, out5, out6, out7, out8, out9, out10]
+    trace1 = [ind11, ind21, ind31, ind41, ind51, ind61, ind71, ind81, ind91, ind101]
+    trace2 = [ind12, ind22, ind32, ind42, ind52, ind62, ind72, ind82, ind92, ind102]
+    trace3 = [ind13, ind23, ind33, ind43, ind53, ind63, ind73, ind83, ind93, ind103]
+    trace4 = [ind14, ind24, ind34, ind44, ind54, ind64, ind74, ind84, ind94, ind104]
+    trace5 = [ind15, ind25, ind35, ind45, ind55, ind65, ind75, ind85, ind95, ind105]
 
-    fig.add_trace(go.Scatterpolar(
-        r=[ind11, ind21, ind31, ind41, ind51, ind61, ind71, ind81, ind91, ind101,],
-        theta=[out1, out2, out3, out4, out5, out6, out7, out8, out9, out10],
-        fill='toself',
-        name= name1,
-    ))
-    fig.add_trace(go.Scatterpolar(
-        r=[ind12, ind22, ind32, ind42, ind52, ind62, ind72, ind82, ind92, ind102],
-        theta=[out1, out2, out3, out4, out5, out6, out7, out8, out9, out10],
-        fill='toself',
-        name= name2,
-    ))
-    fig.add_trace(go.Scatterpolar(
-        r=[ind13, ind23, ind33, ind43, ind53, ind63, ind73, ind83, ind93, ind103],
-        theta=[out1, out2, out3, out4, out5, out6, out7, out8, out9, out10],
-        fill='toself',
-        name= name3,
-    ))
+    if name2 == None and name3 == None and name4 == None and name5 == None:
+        fig = radar_chart(
+                    name1 = name1, 
+                    r1 = trace1,
+                    theta = theta,
+                ) 
+    elif name3 == None  and name4 == None and name5 == None: 
+        fig = radar_chart(
+                    name1 = name1, 
+                    name2 = name2, 
+                    r1 = trace1,
+                    r2 = trace2,
+                    theta = theta,
+                ) 
+    elif name4 == None and name5 == None:
+        fig = radar_chart(
+                    name1 = name1, 
+                    name2 = name2, 
+                    name3 = name3,
+                    r1 = trace1,
+                    r2 = trace2,
+                    r3 = trace3,
+                    theta = theta,
+                )   
 
-    fig.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 10]
-            ),
-        ),
-        showlegend=True
-    )
+    elif name5 == None:
+        fig = radar_chart(
+                    name1 = name1, 
+                    name2 = name2, 
+                    name3 = name3,
+                    name4 = name4,
+                    r1 = trace1,
+                    r2 = trace2,
+                    r3 = trace3,
+                    r4 = trace4,
+                    theta = theta,
+                )
+    else:
+        fig = radar_chart(
+                    name1 = name1, 
+                    name2 = name2, 
+                    name3 = name3,
+                    name4 = name4,
+                    name5 = name5,
+                    r1 = trace1,
+                    r2 = trace2,
+                    r3 = trace3,
+                    r4 = trace4,
+                    r5 = trace5,
+                    theta = theta,
+                )
 
     return fig
 
@@ -2340,6 +3179,7 @@ def chart_crop_update (name1, ind11, ind21, ind31, ind41, ind51, ind61, ind71, i
     Output('methods', 'is_open'),
     [Input("methods-button", "n_clicks")],
     [State("methods", "is_open")],
+    prevent_initial_call=True
 )
 def open_methods(n, is_open):
     if n:
@@ -2351,6 +3191,7 @@ def open_methods(n, is_open):
     Output('info-nicholls-altieri', 'is_open'),
     [Input("info-button", "n_clicks")],
     [State("info-nicholls-altieri", "is_open")],
+    prevent_initial_call=True
 )
 def open_methods(n, is_open):
     if n:
@@ -2363,6 +3204,7 @@ def open_methods(n, is_open):
     Output('crop-table', 'is_open'),
     [Input("crop-table-button", "n_clicks")],
     [State("crop-table", "is_open")],
+    prevent_initial_call=True
 )
 def open_soil_table(n, is_open):
     if n:
@@ -2374,6 +3216,7 @@ def open_soil_table(n, is_open):
     Output('nichols-altieri-crop', 'is_open'),
     [Input("crop", "n_clicks")],
     [State("nichols-altieri-crop", "is_open")],
+    prevent_initial_call=True
 )
 def open_crop(n, is_open):
     if n:
@@ -2385,6 +3228,7 @@ def open_crop(n, is_open):
     Output('crop-2', 'is_open'),
     [Input("add2-crop", "n_clicks")],
     [State("crop-2", "is_open")],
+    prevent_initial_call=True
 )
 def open_crop(n, is_open):
     if n:
@@ -2396,224 +3240,165 @@ def open_crop(n, is_open):
     Output('crop-3', 'is_open'),
     [Input("add3-crop", "n_clicks")],
     [State("crop-3", "is_open")],
+    prevent_initial_call=True
 )
 def open_crop(n, is_open):
     if n:
         return not is_open
     return is_open
 
-# SHOW RADAR 1
+# INPUT 4
 @app.callback(
-    Output('crop-radar1', 'is_open'),
-    [Input("show-crop-radar", 'n_clicks')],
-    [State('crop-radar1', "is_open")],
+    Output('crop-4', 'is_open'),
+    [Input("add4-crop", "n_clicks")],
+    [State("crop-4", "is_open")],
+    prevent_initial_call=True
 )
 def open_crop(n, is_open):
     if n:
         return not is_open
     return is_open
 
-# SHOW RADAR 2
+# INPUT 5
 @app.callback(
-    Output('crop-radar2', 'is_open'),
-    [Input("show-crop-radar2", 'n_clicks')],
-    [State('crop-radar2', "is_open")],
+    Output('crop-5', 'is_open'),
+    [Input("add5-crop", "n_clicks")],
+    [State("crop-5", "is_open")],
+    prevent_initial_call=True
 )
 def open_crop(n, is_open):
     if n:
         return not is_open
     return is_open
 
-# SHOW RADAR 3
-@app.callback(
-    Output('crop-radar3', 'is_open'),
-    [Input("show-crop-radar3", 'n_clicks')],
-    [State('crop-radar3', "is_open")],
-)
-def open_crop(n, is_open):
-    if n:
-        return not is_open
-    return is_open
-
-# RADAR 1
+# SOIL HEALTH RADAR OUTPUT
 @app.callback(
     Output('figure-crop', 'figure'),
-    [Input('name-crop', 'value'),
-     Input('aparencia', 'value'),
-     Input('crescimento', 'value'),
-     Input('resistencia', 'value'),
-     Input('incidencia', 'value'),
-     Input('competicao', 'value'),
-     Input('rendimento', 'value'),
-     Input('genetica', 'value'),
-     Input('vegetal', 'value'),
-     Input('circundante', 'value'),
-     Input('manejo', 'value'),
-     ]
+    Input("show-crop-radar", 'n_clicks'),
+    [State('name-crop', 'value'),
+     State('aparencia', 'value'),
+     State('crescimento', 'value'),
+     State('resistencia', 'value'),
+     State('incidencia', 'value'),
+     State('competicao', 'value'),
+     State('rendimento', 'value'),
+     State('genetica', 'value'),
+     State('vegetal', 'value'),
+     State('circundante', 'value'),
+     State('manejo', 'value'),
+     State('name-crop2', 'value'),
+     State('aparencia2', 'value'),
+     State('crescimento2', 'value'),
+     State('resistencia2', 'value'),
+     State('incidencia2', 'value'),
+     State('competicao2', 'value'),
+     State('rendimento2', 'value'),
+     State('genetica2', 'value'),
+     State('vegetal2', 'value'),
+     State('circundante2', 'value'),
+     State('manejo2', 'value'),
+     State('name-crop3', 'value'),
+     State('aparencia3', 'value'),
+     State('crescimento3', 'value'),
+     State('resistencia3', 'value'),
+     State('incidencia3', 'value'),
+     State('competicao3', 'value'),
+     State('rendimento3', 'value'),
+     State('genetica3', 'value'),
+     State('vegetal3', 'value'),
+     State('circundante3', 'value'),
+     State('manejo3', 'value'),
+     State('name-crop4', 'value'),
+     State('aparencia4', 'value'),
+     State('crescimento4', 'value'),
+     State('resistencia4', 'value'),
+     State('incidencia4', 'value'),
+     State('competicao4', 'value'),
+     State('rendimento4', 'value'),
+     State('genetica4', 'value'),
+     State('vegetal4', 'value'),
+     State('circundante4', 'value'),
+     State('manejo4', 'value'),
+     State('name-crop5', 'value'),
+     State('aparencia5', 'value'),
+     State('crescimento5', 'value'),
+     State('resistencia5', 'value'),
+     State('incidencia5', 'value'),
+     State('competicao5', 'value'),
+     State('rendimento5', 'value'),
+     State('genetica5', 'value'),
+     State('vegetal5', 'value'),
+     State('circundante5', 'value'),
+     State('manejo5', 'value'),],
+     prevent_initial_call=True
 )
-def chart_crop_update (name_value, aparencia, crescimento, resistencia, incidencia, competicao, rendimento,
-                  genetica, vegetal, circundante, manejo):
-
-
-    fig = go.Figure()
-
-    fig.add_trace(go.Scatterpolar(
-        r=[aparencia, crescimento, resistencia, incidencia, competicao,
-           rendimento, genetica, vegetal, circundante, manejo
-           ],
-        theta=indi_crop,
-        fill='toself',
-        name= name_value,
-    ))
-
-    fig.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 10]
-            ),
-        ),
-        showlegend=True
-    )
-
-    return fig
-
-# RADAR 2
-@app.callback(
-    Output('figure-crop2', 'figure'),
-    [Input('name-crop', 'value'),
-     Input('aparencia', 'value'),
-     Input('crescimento', 'value'),
-     Input('resistencia', 'value'),
-     Input('incidencia', 'value'),
-     Input('competicao', 'value'),
-     Input('rendimento', 'value'),
-     Input('genetica', 'value'),
-     Input('vegetal', 'value'),
-     Input('circundante', 'value'),
-     Input('manejo', 'value'),
-     Input('name-crop2', 'value'),
-     Input('aparencia2', 'value'),
-     Input('crescimento2', 'value'),
-     Input('resistencia2', 'value'),
-     Input('incidencia2', 'value'),
-     Input('competicao2', 'value'),
-     Input('rendimento2', 'value'),
-     Input('genetica2', 'value'),
-     Input('vegetal2', 'value'),
-     Input('circundante2', 'value'),
-     Input('manejo2', 'value'),
-     ]
-)
-def chart_crop_update (name_value, aparencia, crescimento, resistencia, incidencia, competicao, rendimento,
-                    genetica, vegetal, circundante, manejo,
-                    name_value2, aparencia2, crescimento2, resistencia2, incidencia2, competicao2, rendimento2,
-                    genetica2, vegetal2, circundante2, manejo2):
-
-
-    fig = go.Figure()
-
-    fig.add_trace(go.Scatterpolar(
-        r=[aparencia, crescimento, resistencia, incidencia, competicao,
-           rendimento, genetica, vegetal, circundante, manejo
-           ],
-        theta=indi_crop,
-        fill='toself',
-        name= name_value,
-    ))
-    fig.add_trace(go.Scatterpolar(
-        r=[aparencia2, crescimento2, resistencia2, incidencia2, competicao2,
-           rendimento2, genetica2, vegetal2, circundante2, manejo2
-           ],
-        theta=indi_crop,
-        fill='toself',
-        name= name_value2,
-    ))
-
-    fig.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 10]
-            ),
-        ),
-        showlegend=True
-    )
-
-    return fig
-
-# RADAR 3
-@app.callback(
-    Output('figure-crop3', 'figure'),
-    [Input('name-crop', 'value'),
-     Input('aparencia', 'value'),
-     Input('crescimento', 'value'),
-     Input('resistencia', 'value'),
-     Input('incidencia', 'value'),
-     Input('competicao', 'value'),
-     Input('rendimento', 'value'),
-     Input('genetica', 'value'),
-     Input('vegetal', 'value'),
-     Input('circundante', 'value'),
-     Input('manejo', 'value'),
-     Input('name-crop2', 'value'),
-     Input('aparencia2', 'value'),
-     Input('crescimento2', 'value'),
-     Input('resistencia2', 'value'),
-     Input('incidencia2', 'value'),
-     Input('competicao2', 'value'),
-     Input('rendimento2', 'value'),
-     Input('genetica2', 'value'),
-     Input('vegetal2', 'value'),
-     Input('circundante2', 'value'),
-     Input('manejo2', 'value'),
-     Input('name-crop3', 'value'),
-     Input('aparencia3', 'value'),
-     Input('crescimento3', 'value'),
-     Input('resistencia3', 'value'),
-     Input('incidencia3', 'value'),
-     Input('competicao3', 'value'),
-     Input('rendimento3', 'value'),
-     Input('genetica3', 'value'),
-     Input('vegetal3', 'value'),
-     Input('circundante3', 'value'),
-     Input('manejo3', 'value'),
-     ]
-)
-def chart_crop_update (name1, ind1, ind2, ind3, ind4, ind5, ind6, ind7, ind8, ind9, ind10,
+def chart_crop_update (n, name1, ind1, ind2, ind3, ind4, ind5, ind6, ind7, ind8, ind9, ind10,
                         name2, ind12, ind22, ind32, ind42, ind52, ind62, ind72, ind82, ind92, ind102,
-                        name3, ind13, ind23, ind33, ind43, ind53, ind63, ind73, ind83, ind93, ind103):
+                        name3, ind13, ind23, ind33, ind43, ind53, ind63, ind73, ind83, ind93, ind103,
+                        name4, ind14, ind24, ind34, ind44, ind54, ind64, ind74, ind84, ind94, ind104,
+                        name5, ind15, ind25, ind35, ind45, ind55, ind65, ind75, ind85, ind95, ind105):
 
+    trace1 = [ind1, ind2, ind3, ind4, ind5, ind6, ind7, ind8, ind9, ind10]
+    trace2 = [ind12, ind22, ind32, ind42, ind52, ind62, ind72, ind82, ind92, ind102]
+    trace3 = [ind13, ind23, ind33, ind43, ind53, ind63, ind73, ind83, ind93, ind103]
+    trace4 = [ind14, ind24, ind34, ind44, ind54, ind64, ind74, ind84, ind94, ind104]
+    trace5 = [ind15, ind25, ind35, ind45, ind55, ind65, ind75, ind85, ind95, ind105]
+    theta = ['Aparência', 'Crescimento', 'Resistência à estresse',
+             'Incidência de doenças', 'Competição com espontâneas',
+             'Rendimento', 'Diversidade genética', 'Diversidade vegetal',
+             'Diversidade natural circundante', 'Sistema de manejo']
 
-    fig = go.Figure()
+    if name2 == None and name3 == None and name4 == None and name5 == None:
+        fig = radar_chart(
+                    name1 = name1, 
+                    r1 = trace1,
+                    theta = theta,
+                ) 
+    elif name3 == None  and name4 == None and name5 == None: 
+        fig = radar_chart(
+                    name1 = name1, 
+                    name2 = name2, 
+                    r1 = trace1,
+                    r2 = trace2,
+                    theta = theta,
+                ) 
+    elif name4 == None and name5 == None:
+        fig = radar_chart(
+                    name1 = name1, 
+                    name2 = name2, 
+                    name3 = name3,
+                    r1 = trace1,
+                    r2 = trace2,
+                    r3 = trace3,
+                    theta = theta,
+                )   
 
-    fig.add_trace(go.Scatterpolar(
-        r=[ind1, ind2, ind3, ind4, ind5, ind6, ind7, ind8, ind9, ind10],
-        theta=indi_crop,
-        fill='toself',
-        name= name1
-    ))
-    fig.add_trace(go.Scatterpolar(
-        r=[ind12, ind22, ind32, ind42, ind52, ind62, ind72, ind82, ind92, ind102],
-        theta=indi_crop,
-        fill='toself',
-        name= name2,
-    ))
-    fig.add_trace(go.Scatterpolar(
-        r=[ind13, ind23, ind33, ind43, ind53, ind63, ind73, ind83, ind93, ind103],
-        theta=indi_crop,
-        fill='toself',
-        name= name3,
-    ))
-    fig.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 10]
-            ),
-        ),
-        showlegend=True
-    )
+    elif name5 == None:
+        fig = radar_chart(
+                    name1 = name1, 
+                    name2 = name2, 
+                    name3 = name3,
+                    name4 = name4,
+                    r1 = trace1,
+                    r2 = trace2,
+                    r3 = trace3,
+                    r4 = trace4,
+                    theta = theta,
+                )
+    else:
+        fig = radar_chart(
+                    name1 = name1, 
+                    name2 = name2, 
+                    name3 = name3,
+                    name4 = name4,
+                    name5 = name5,
+                    r1 = trace1,
+                    r2 = trace2,
+                    r3 = trace3,
+                    r4 = trace4,
+                    r5 = trace5,
+                    theta = theta,
+                )
 
     return fig
 
@@ -2624,41 +3409,9 @@ def chart_crop_update (name1, ind1, ind2, ind3, ind4, ind5, ind6, ind7, ind8, in
     Output('soil-table', 'is_open'),
     [Input("soil-table-button", "n_clicks")],
     [State("soil-table", "is_open")],
+    prevent_initial_call=True
 )
 def open_soil_table(n, is_open):
-    if n:
-        return not is_open
-    return is_open
-
-# SHOW RADAR 1
-@app.callback(
-    Output('soil-radar', 'is_open'),
-    [Input("show-soil-radar", "n_clicks")],
-    [State("soil-radar", "is_open")],
-)
-def open_crop(n, is_open):
-    if n:
-        return not is_open
-    return is_open
-
-# SHOW RADAR 2
-@app.callback(
-    Output('soil-radar2', 'is_open'),
-    [Input("show-soil-radar2", "n_clicks")],
-    [State("soil-radar2", "is_open")],
-)
-def open_crop(n, is_open):
-    if n:
-        return not is_open
-    return is_open
-
-# SHOW RADAR 3
-@app.callback(
-    Output('soil-radar3', 'is_open'),
-    [Input("show-soil-radar3", "n_clicks")],
-    [State("soil-radar3", "is_open")],
-)
-def open_crop(n, is_open):
     if n:
         return not is_open
     return is_open
@@ -2668,6 +3421,7 @@ def open_crop(n, is_open):
     Output('nichols-altieri-soil', 'is_open'),
     [Input("soil", "n_clicks")],
     [State("nichols-altieri-soil", "is_open")],
+    prevent_initial_call=True
 )
 def open_soil(n, is_open):
     if n:
@@ -2679,6 +3433,7 @@ def open_soil(n, is_open):
     Output('soil-2', 'is_open'),
     [Input("add2-soil", "n_clicks")],
     [State("soil-2", "is_open")],
+    prevent_initial_call=True
 )
 def open_crop(n, is_open):
     if n:
@@ -2690,296 +3445,320 @@ def open_crop(n, is_open):
     Output('soil-3', 'is_open'),
     [Input("add3-soil", "n_clicks")],
     [State("soil-3", "is_open")],
+    prevent_initial_call=True
 )
 def open_crop(n, is_open):
     if n:
         return not is_open
     return is_open
 
-# RADAR 1
+# INPUT 4
 @app.callback(
-    Output('figure', 'figure'),
-    [Input('name', 'value'),
-     Input('ind1', 'value'),
-     Input('ind2', 'value'),
-     Input('ind3', 'value'),
-     Input('ind4', 'value'),
-     Input('ind5', 'value'),
-     Input('ind6', 'value'),
-     Input('ind7', 'value'),
-     Input('ind8', 'value'),
-     Input('ind9', 'value'),
-     Input('ind10', 'value'),
-     ]
+    Output('soil-4', 'is_open'),
+    [Input("add4-soil", "n_clicks")],
+    [State("soil-4", "is_open")],
+    prevent_initial_call=True
 )
-def chart_soil_update (name_value, ind1_value, ind2_value, ind3_value, ind4_value, ind5_value, ind6_value,
-                       ind7_value, ind8_value, ind9_value, ind10_value,
-                       ):
-    fig = go.Figure()
+def open_crop(n, is_open):
+    if n:
+        return not is_open
+    return is_open
 
-    fig.add_trace(go.Scatterpolar(
-        r=[ind1_value, ind2_value, ind3_value, ind4_value, ind5_value,
-           ind6_value, ind7_value, ind8_value, ind9_value, ind10_value
-           ],
-        theta=indicadores_nichollsaltieri_soil,
-        fill='toself',
-        name= name_value,
-    ))
-
-
-    fig.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 10]
-            ),
-        ),
-        showlegend=True
-    )
-
-    return fig
-# RADAR 2
+# INPUT 5
 @app.callback(
-    Output('fig-soil-2', 'figure'),
-    [Input('name', 'value'),
-     Input('ind1', 'value'),
-     Input('ind2', 'value'),
-     Input('ind3', 'value'),
-     Input('ind4', 'value'),
-     Input('ind5', 'value'),
-     Input('ind6', 'value'),
-     Input('ind7', 'value'),
-     Input('ind8', 'value'),
-     Input('ind9', 'value'),
-     Input('ind10', 'value'),
-     Input('name-soil2', 'value'),
-      Input('soil10', 'value'),
-      Input('soil20', 'value'),
-      Input('soil30', 'value'),
-      Input('soil40', 'value'),
-      Input('soil50', 'value'),
-      Input('soil60', 'value'),
-      Input('soil70', 'value'),
-      Input('soil80', 'value'),
-      Input('soil90', 'value'),
-      Input('soil100', 'value'),
-    ]
+    Output('soil-5', 'is_open'),
+    [Input("add5-soil", "n_clicks")],
+    [State("soil-5", "is_open")],
+    prevent_initial_call=True
 )
+def open_crop(n, is_open):
+    if n:
+        return not is_open
+    return is_open
 
-def add_analise (name_value, ind1_value, ind2_value, ind3_value, ind4_value, ind5_value, ind6_value,
-                        ind7_value, ind8_value, ind9_value, ind10_value,
-                        name_soil2, soil1_value, soil2_value, soil3_value, soil4_value, soil5_value,
-                        soil6_value, soil7_value, soil8_value, soil9_value, soil10_value):
-
-    fig = go.Figure()
-
-    fig.add_trace(go.Scatterpolar(
-        r=[ind1_value, ind2_value, ind3_value, ind4_value, ind5_value,
-           ind6_value, ind7_value, ind8_value, ind9_value, ind10_value
-           ],
-        theta=indicadores_nichollsaltieri_soil,
-        fill='toself',
-        name= name_value,
-    ))
-
-    fig.add_trace(go.Scatterpolar(
-        r=[soil1_value, soil2_value, soil3_value, soil4_value, soil5_value,
-            soil6_value, soil7_value, soil8_value, soil9_value, soil10_value],
-        theta=indicadores_nichollsaltieri_soil,
-        fill='toself',
-        name=name_soil2
-    ))
-    fig.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 10]
-            ),
-        ),
-        showlegend=True
-    )
-    return fig
-# RADAR 3
+# SOIL RADAR OUTPUT
 @app.callback(
-    Output('fig-soil-3', 'figure'),
-    [Input('name', 'value'),
-     Input('ind1', 'value'),
-     Input('ind2', 'value'),
-     Input('ind3', 'value'),
-     Input('ind4', 'value'),
-     Input('ind5', 'value'),
-     Input('ind6', 'value'),
-     Input('ind7', 'value'),
-     Input('ind8', 'value'),
-     Input('ind9', 'value'),
-     Input('ind10', 'value'),
-     Input('name-soil2', 'value'),
-      Input('soil10', 'value'),
-      Input('soil20', 'value'),
-      Input('soil30', 'value'),
-      Input('soil40', 'value'),
-      Input('soil50', 'value'),
-      Input('soil60', 'value'),
-      Input('soil70', 'value'),
-      Input('soil80', 'value'),
-      Input('soil90', 'value'),
-      Input('soil100', 'value'),
-     Input('name-soil3', 'value'),
-     Input('3soil1', 'value'),
-     Input('soil200', 'value'),
-     Input('soil300', 'value'),
-     Input('soil400', 'value'),
-     Input('soil500', 'value'),
-     Input('soil600', 'value'),
-     Input('soil700', 'value'),
-     Input('soil800', 'value'),
-     Input('soil900', 'value'),
-     Input('3soil10', 'value'),
-    ]
+    Output('soil-figure', 'figure'),
+    Input("show-soil-radar", "n_clicks"),
+    [State('name', 'value'),
+     State('ind1', 'value'),
+     State('ind2', 'value'),
+     State('ind3', 'value'),
+     State('ind4', 'value'),
+     State('ind5', 'value'),
+     State('ind6', 'value'),
+     State('ind7', 'value'),
+     State('ind8', 'value'),
+     State('ind9', 'value'),
+     State('ind10', 'value'),
+     State('name-soil2', 'value'),
+     State('soil10', 'value'),
+     State('soil20', 'value'),
+     State('soil30', 'value'),
+     State('soil40', 'value'),
+     State('soil50', 'value'),
+     State('soil60', 'value'),
+     State('soil70', 'value'),
+     State('soil80', 'value'),
+     State('soil90', 'value'),
+     State('soil100', 'value'),
+     State('name-soil3', 'value'),
+     State('3soil1', 'value'),
+     State('soil200', 'value'),
+     State('soil300', 'value'),
+     State('soil400', 'value'),
+     State('soil500', 'value'),
+     State('soil600', 'value'),
+     State('soil700', 'value'),
+     State('soil800', 'value'),
+     State('soil900', 'value'),
+     State('3soil10', 'value'),
+     State('name-soil4', 'value'),
+     State('4soil1', 'value'),
+     State('4soil2', 'value'),
+     State('4soil3', 'value'),
+     State('4soil4', 'value'),
+     State('4soil5', 'value'),
+     State('4soil6', 'value'),
+     State('4soil7', 'value'),
+     State('4soil8', 'value'),
+     State('4soil9', 'value'),
+     State('4soil10', 'value'),
+     State('name-soil5', 'value'),
+     State('5soil1', 'value'),
+     State('5soil2', 'value'),
+     State('5soil3', 'value'),
+     State('5soil4', 'value'),
+     State('5soil5', 'value'),
+     State('5soil6', 'value'),
+     State('5soil7', 'value'),
+     State('5soil8', 'value'),
+     State('5soil9', 'value'),
+     State('5soil10', 'value'),],
+    prevent_initial_call=True
 )
-def add_analise (name_value, ind1_value, ind2_value, ind3_value, ind4_value, ind5_value, ind6_value,
-                        ind7_value, ind8_value, ind9_value, ind10_value,
-                        name_soil2, soil1_value, soil2_value, soil3_value, soil4_value, soil5_value,
-                        soil6_value, soil7_value, soil8_value, soil9_value, soil10_value,
-                        name3, soil1, soil2, soil3, soil4, soil5, soil6, soil7, soil8, soil9, soil10):
+def add_analise (n, 
+        soil_name1, soil_1_1, soil_1_2, soil_1_3, soil_1_4, soil_1_5, soil_1_6,
+            soil_1_7, soil_1_8, soil_1_9, soil_1_10,
 
-    fig = go.Figure()
+        soil_name2, soil_2_1, soil_2_2, soil_2_3, soil_2_4, soil_2_5,
+            soil_2_6, soil_2_7, soil_2_8, soil_2_9, soil_2_10,
 
-    fig.add_trace(go.Scatterpolar(
-        r=[ind1_value, ind2_value, ind3_value, ind4_value, ind5_value,
-           ind6_value, ind7_value, ind8_value, ind9_value, ind10_value
-           ],
-        theta=indicadores_nichollsaltieri_soil,
-        fill='toself',
-        name= name_value,
-    ))
+        soil_name3, soil_3_1, soil_3_2, soil_3_3, soil_3_4, soil_3_5, soil_3_6, soil_3_7,
+            soil_3_8, soil_3_9, soil_3_10,
+                        
+        soil_name4, soil_4_1, soil_4_2, soil_4_3, soil_4_4, soil_4_5, soil_4_6, soil_4_7,
+            soil_4_8, soil_4_9, soil_4_10,
 
-    fig.add_trace(go.Scatterpolar(
-        r=[soil1_value, soil2_value, soil3_value, soil4_value, soil5_value,
-            soil6_value, soil7_value, soil8_value, soil9_value, soil10_value],
-        theta=indicadores_nichollsaltieri_soil,
-        fill='toself',
-        name=name_soil2
-    ))
-    fig.add_trace(go.Scatterpolar(
-        r=[soil1, soil2, soil3, soil4, soil5,
-           soil6, soil7, soil8, soil9, soil10],
-        theta=indicadores_nichollsaltieri_soil,
-        fill='toself',
-        name=name3
-    ))
-    fig.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 10]
-            ),
-        ),
-        showlegend=True
-    )
+        soil_name5, soil_5_1, soil_5_2, soil_5_3, soil_5_4, soil_5_5, soil_5_6, soil_5_7,
+                soil_5_8, soil_5_9, soil_5_10
+):
+
+    trace1 = [soil_1_1, soil_1_2, soil_1_3, soil_1_4, soil_1_5, soil_1_6, soil_1_7, 
+                soil_1_8, soil_1_9, soil_1_10]
+    trace2 = [soil_2_1, soil_2_2, soil_2_3, soil_2_4, soil_2_5, soil_2_6, soil_2_7, 
+                soil_2_8, soil_2_9, soil_2_10]
+    trace3 = [soil_3_1, soil_3_2, soil_3_3, soil_3_4, soil_3_5, soil_3_6, soil_3_7,
+                soil_3_8, soil_3_9, soil_3_10]
+    trace4 = [soil_4_1, soil_4_2, soil_4_3, soil_4_4, soil_4_5, soil_4_6, soil_4_7,
+                soil_4_8, soil_4_9, soil_4_10]
+    trace5 = [soil_5_1, soil_5_2, soil_5_3, soil_5_4, soil_5_5, soil_5_6, soil_5_7,
+                soil_5_8, soil_5_9, soil_5_10]
+
+    theta = ["Estrutura", "Compactação e infiltração", "Produndidade do solo",
+              "Estado dos resíduos", "Cor, cheiro e matéria orgânica", "Retenção da umidade",
+               "Desenvolvimento de raízes", "Cobertura do solo", "Erosão", "Atividade biológica"]
+
+    if soil_name2 == None and soil_name3 == None and soil_name4 == None and soil_name5 == None:
+        fig = radar_chart(
+                    name1 = soil_name1, 
+                    r1 = trace1,
+                    theta = theta,
+                ) 
+    elif soil_name3 == None  and soil_name4 == None and soil_name5 == None: 
+        fig = radar_chart(
+                    name1 = soil_name1, 
+                    name2 = soil_name2, 
+                    r1 = trace1,
+                    r2 = trace2,
+                    theta = theta,
+                ) 
+    elif soil_name4 == None and soil_name5 == None:
+        fig = radar_chart(
+                    name1 = soil_name1, 
+                    name2 = soil_name2, 
+                    name3 = soil_name3,
+                    r1 = trace1,
+                    r2 = trace2,
+                    r3 = trace3,
+                    theta = theta,
+                )   
+
+    elif soil_name5 == None:
+        fig = radar_chart(
+                    name1 = soil_name1, 
+                    name2 = soil_name2, 
+                    name3 = soil_name3,
+                    name4 = soil_name4,
+                    r1 = trace1,
+                    r2 = trace2,
+                    r3 = trace3,
+                    r4 = trace4,
+                    theta = theta,
+                )
+    else:
+        fig = radar_chart(
+                    name1 = soil_name1, 
+                    name2 = soil_name2, 
+                    name3 = soil_name3,
+                    name4 = soil_name4,
+                    name5 = soil_name5,
+                    r1 = trace1,
+                    r2 = trace2,
+                    r3 = trace3,
+                    r4 = trace4,
+                    r5 = trace5,
+                    theta = theta,
+                )
+
     return fig
 
 
 #--------------------CUSTOM METHOD UPDATE-------------------------------------------------------------------------------
+#  TODO: tirar os prevent call dos formularios de criação de indicadores 
 @app.callback(
     [Output('method-name', 'children'),
      Output('method-name2', 'children'),
-     Output('method-name3', 'children')],
-    [Input('new-method-name', 'value')]
+     Output('method-name3', 'children'),
+     Output('method-name4', 'children'),
+     Output('method-name5', 'children')],
+    [Input('new-method-name', 'value')],
+    prevent_initial_call=True
 )
 def update_new_output(input_value):
-    return '{}'.format(input_value), '{} (Análise 2)'.format(input_value), '{} (Análise 3)'.format(input_value)
+    return f'{input_value} (Análise 1)', f'{input_value} (Análise 2)', f'{input_value} (Análise 3)', f'{input_value} (Análise 4)', f'{input_value} (Análise 5)'
 
 @app.callback(
     [Output('new-1-out', 'children'),
     Output('2new-1-out', 'children'),
-     Output('3new-1-out', 'children')],
-    [Input('cria1', 'value')]
+     Output('3new-1-out', 'children'),
+     Output('4new-1-out', 'children'),
+     Output('5new-1-out', 'children')],
+    [Input('cria1', 'value')],
+    prevent_initial_call=True
 )
 def update_new_output(input_value):
-    return '{}: '.format(input_value), '{}: '.format(input_value), '{}: '.format(input_value)
+    return f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: '
 
 @app.callback(
     [Output('new-2-out', 'children'),
      Output('2new-2-out', 'children'),
-     Output('3new-2-out', 'children')],
-    [Input('cria2', 'value')]
+     Output('3new-2-out', 'children'),
+     Output('4new-2-out', 'children'),
+     Output('5new-2-out', 'children')],
+    [Input('cria2', 'value')],
+    prevent_initial_call=True
 )
 def update_new_output(input_value):
-    return '{}: '.format(input_value), '{}: '.format(input_value), '{}: '.format(input_value)
+    return f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: '
 
 @app.callback(
     [Output('new-3-out', 'children'),
      Output('2new-3-out', 'children'),
-     Output('3new-3-out', 'children')],
-    [Input('cria3', 'value')]
+     Output('3new-3-out', 'children'),
+     Output('4new-3-out', 'children'),
+     Output('5new-3-out', 'children'),],
+    [Input('cria3', 'value')],
+    prevent_initial_call=True
 )
 def update_new_output(input_value):
-    return '{}: '.format(input_value), '{}: '.format(input_value), '{}: '.format(input_value)
+    return f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: '
 
 @app.callback(
     [Output('new-4-out', 'children'),
      Output('2new-4-out', 'children'),
-     Output('3new-4-out', 'children')],
-    [Input('cria4', 'value')]
+     Output('3new-4-out', 'children'),
+     Output('4new-4-out', 'children'),
+     Output('5new-4-out', 'children'),],
+    [Input('cria4', 'value')],
+    prevent_initial_call=True
 )
 def update_new_output(input_value):
-    return '{}: '.format(input_value), '{}: '.format(input_value), '{}: '.format(input_value)
+    return f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: '
 
 @app.callback(
     [Output('new-5-out', 'children'),
      Output('2new-5-out', 'children'),
-     Output('3new-5-out', 'children')],
-    [Input('cria5', 'value')]
+     Output('3new-5-out', 'children'),
+     Output('4new-5-out', 'children'),
+     Output('5new-5-out', 'children'),],
+    [Input('cria5', 'value')],
+    prevent_initial_call=True
 )
 def update_new_output(input_value):
-    return '{}: '.format(input_value), '{}: '.format(input_value), '{}: '.format(input_value)
+    return f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: '
 
 @app.callback(
     [Output('new-6-out', 'children'),
      Output('2new-6-out', 'children'),
-     Output('3new-6-out', 'children')],
-    [Input('cria6', 'value')]
+     Output('3new-6-out', 'children'),
+     Output('4new-6-out', 'children'),
+     Output('5new-6-out', 'children'),],
+    [Input('cria6', 'value')],
+    prevent_initial_call=True
 )
 def update_new_output(input_value):
-    return '{}: '.format(input_value), '{}: '.format(input_value), '{}: '.format(input_value)
+    return f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: '
 
 @app.callback(
     [Output('new-7-out', 'children'),
      Output('2new-7-out', 'children'),
-     Output('3new-7-out', 'children')],
-    [Input('cria7', 'value')]
+     Output('3new-7-out', 'children'),
+     Output('4new-7-out', 'children'),
+     Output('5new-7-out', 'children'),],
+    [Input('cria7', 'value')],
+    prevent_initial_call=True
 )
 def update_new_output(input_value):
-    return '{}: '.format(input_value), '{}: '.format(input_value), '{}: '.format(input_value)
+    return f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: '
 
 @app.callback(
     [Output('new-8-out', 'children'),
      Output('2new-8-out', 'children'),
-     Output('3new-8-out', 'children')],
-    [Input('cria8', 'value')]
+     Output('3new-8-out', 'children'),
+     Output('4new-8-out', 'children'),
+     Output('5new-8-out', 'children'),],
+    [Input('cria8', 'value')],
+    prevent_initial_call=True
 )
 def update_new_output(input_value):
-    return '{}: '.format(input_value), '{}: '.format(input_value), '{}: '.format(input_value)
+    return f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: '
 
 @app.callback(
     [Output('new-9-out', 'children'),
      Output('2new-9-out', 'children'),
-     Output('3new-9-out', 'children')],
-    [Input('cria9', 'value')]
+     Output('3new-9-out', 'children'),
+     Output('4new-9-out', 'children'),
+     Output('5new-9-out', 'children'),],
+    [Input('cria9', 'value')],
+    prevent_initial_call=True
 )
 def update_new_output(input_value):
-    return '{}: '.format(input_value), '{}: '.format(input_value), '{}: '.format(input_value)
+    return f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: '
 
 @app.callback(
     [Output('new-10-out', 'children'),
     Output('2new-10-out', 'children'),
-     Output('3new-10-out', 'children')],
-    [Input('cria10', 'value')]
+     Output('3new-10-out', 'children'),
+     Output('4new-10-out', 'children'),
+     Output('5new-10-out', 'children'),],
+    [Input('cria10', 'value')],
+    prevent_initial_call=True
 )
 def update_new_output(input_value):
-    return '{}: '.format(input_value), '{}: '.format(input_value), '{}: '.format(input_value)
+    return f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: ', f'{input_value}: '
 
 #-----------------------------------------------------------------------------------APP RUN-----------------------------
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
+    # app.run_server(port=8050,host='0.0.0.0')
