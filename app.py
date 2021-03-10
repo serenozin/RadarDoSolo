@@ -224,16 +224,21 @@ def radar_chart(
     r1 = None, r2 = None, r3 = None, r4 = None, r5 = None,
     theta = None
     ):
+    
+    theta.append(theta[0])
 
     fig = go.Figure()
 
     if r2 == None and r3 == None and r4 == None and r5 == None: 
+        r1.append(r1[0])
         fig.add_trace(go.Scatterpolar(
             r=r1, theta=theta,
             name=name1,
             )
         )
     elif r3 == None and r4 == None and r5 == None:
+        r1.append(r1[0])
+        r2.append(r2[0])
         fig.add_trace(go.Scatterpolar(
             r=r1, theta=theta,
             name=name1,
@@ -246,6 +251,9 @@ def radar_chart(
         )
 
     elif r4 == None and r5 == None:
+        r1.append(r1[0])
+        r2.append(r2[0])
+        r3.append(r3[0])
         fig.add_trace(go.Scatterpolar(
             r=r1, theta=theta,
             name=name1,
@@ -262,6 +270,10 @@ def radar_chart(
             )
         )
     elif r5 == None:
+        r1.append(r1[0])
+        r2.append(r2[0])
+        r3.append(r3[0])
+        r4.append(r4[0])
         fig.add_trace(go.Scatterpolar(
             r=r1, theta=theta,
             name=name1,
@@ -283,6 +295,11 @@ def radar_chart(
             )
         )
     else:
+        r1.append(r1[0])
+        r2.append(r2[0])
+        r3.append(r3[0])
+        r4.append(r4[0])
+        r5.append(r5[0])
         fig.add_trace(go.Scatterpolar(
             r=r1, theta=theta,
             name=name1,
