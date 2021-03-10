@@ -222,12 +222,14 @@ indi_crop = ['Aparência', 'Crescimento', 'Resistência à estresse',
 def radar_chart(
     name1, name2 = None, name3 = None, name4 = None, name5 = None,
     r1 = None, r2 = None, r3 = None, r4 = None, r5 = None,
-    theta = None
+    theta = None,
+    title = None
     ):
-    
+
     theta.append(theta[0])
 
     fig = go.Figure()
+    fig.update_layout(title=title)
 
     if r2 == None and r3 == None and r4 == None and r5 == None: 
         r1.append(r1[0])
@@ -367,6 +369,11 @@ app.layout = html.Div(
                 dbc.Col(),
                 dbc.Col(
                     [
+                        dbc.Toast(
+                            [html.P("Agora o gráfico suporta até 5 análises!", className="mb-0")],
+                            header="Atualização 1.2",
+                            dismissable=True,
+                        ),
                         dbc.Card(
                             [
                                 dbc.CardBody(
@@ -3052,7 +3059,8 @@ def open_maked_method(n, is_open):
 @app.callback(
     Output('custom-figure', 'figure'),
     Input("show-new-radar", "n_clicks"),
-    [State('name_new', 'value'),
+    [State('new-method-name', 'value'),
+     State('name_new', 'value'),
      State('new1', 'value'),
      State('new2', 'value'),
      State('new3', 'value'),
@@ -3121,7 +3129,7 @@ def open_maked_method(n, is_open):
      ],
     prevent_initial_call=True
 )
-def custom_radar_graph (n, name1, ind11, ind21, ind31, ind41, ind51, ind61, ind71, ind81, ind91, ind101,
+def custom_radar_graph (n, title, name1, ind11, ind21, ind31, ind41, ind51, ind61, ind71, ind81, ind91, ind101,
                        name2, ind12, ind22, ind32, ind42, ind52, ind62, ind72, ind82, ind92, ind102,
                        name3, ind13, ind23, ind33, ind43, ind53, ind63, ind73, ind83, ind93, ind103,
                        name4, ind14, ind24, ind34, ind44, ind54, ind64, ind74, ind84, ind94, ind104,
@@ -3134,12 +3142,14 @@ def custom_radar_graph (n, name1, ind11, ind21, ind31, ind41, ind51, ind61, ind7
     trace3 = [ind13, ind23, ind33, ind43, ind53, ind63, ind73, ind83, ind93, ind103]
     trace4 = [ind14, ind24, ind34, ind44, ind54, ind64, ind74, ind84, ind94, ind104]
     trace5 = [ind15, ind25, ind35, ind45, ind55, ind65, ind75, ind85, ind95, ind105]
+   
 
     if name2 == None and name3 == None and name4 == None and name5 == None:
         fig = radar_chart(
                     name1 = name1, 
                     r1 = trace1,
                     theta = theta,
+                    title=title
                 ) 
     elif name3 == None  and name4 == None and name5 == None: 
         fig = radar_chart(
@@ -3148,6 +3158,7 @@ def custom_radar_graph (n, name1, ind11, ind21, ind31, ind41, ind51, ind61, ind7
                     r1 = trace1,
                     r2 = trace2,
                     theta = theta,
+                    title=title
                 ) 
     elif name4 == None and name5 == None:
         fig = radar_chart(
@@ -3158,6 +3169,7 @@ def custom_radar_graph (n, name1, ind11, ind21, ind31, ind41, ind51, ind61, ind7
                     r2 = trace2,
                     r3 = trace3,
                     theta = theta,
+                    title=title
                 )   
 
     elif name5 == None:
@@ -3171,6 +3183,7 @@ def custom_radar_graph (n, name1, ind11, ind21, ind31, ind41, ind51, ind61, ind7
                     r3 = trace3,
                     r4 = trace4,
                     theta = theta,
+                    title=title
                 )
     else:
         fig = radar_chart(
@@ -3185,6 +3198,7 @@ def custom_radar_graph (n, name1, ind11, ind21, ind31, ind41, ind51, ind61, ind7
                     r4 = trace4,
                     r5 = trace5,
                     theta = theta,
+                    title=title
                 )
 
     return fig
@@ -3364,12 +3378,14 @@ def chart_crop_update (n, name1, ind1, ind2, ind3, ind4, ind5, ind6, ind7, ind8,
              'Incidência de doenças', 'Competição com espontâneas',
              'Rendimento', 'Diversidade genética', 'Diversidade vegetal',
              'Diversidade natural circundante', 'Sistema de manejo']
+    title = "Saúde da colheita"
 
     if name2 == None and name3 == None and name4 == None and name5 == None:
         fig = radar_chart(
                     name1 = name1, 
                     r1 = trace1,
                     theta = theta,
+                    title=title
                 ) 
     elif name3 == None  and name4 == None and name5 == None: 
         fig = radar_chart(
@@ -3378,6 +3394,7 @@ def chart_crop_update (n, name1, ind1, ind2, ind3, ind4, ind5, ind6, ind7, ind8,
                     r1 = trace1,
                     r2 = trace2,
                     theta = theta,
+                    title=title
                 ) 
     elif name4 == None and name5 == None:
         fig = radar_chart(
@@ -3388,6 +3405,7 @@ def chart_crop_update (n, name1, ind1, ind2, ind3, ind4, ind5, ind6, ind7, ind8,
                     r2 = trace2,
                     r3 = trace3,
                     theta = theta,
+                    title=title
                 )   
 
     elif name5 == None:
@@ -3401,6 +3419,7 @@ def chart_crop_update (n, name1, ind1, ind2, ind3, ind4, ind5, ind6, ind7, ind8,
                     r3 = trace3,
                     r4 = trace4,
                     theta = theta,
+                    title=title
                 )
     else:
         fig = radar_chart(
@@ -3415,6 +3434,7 @@ def chart_crop_update (n, name1, ind1, ind2, ind3, ind4, ind5, ind6, ind7, ind8,
                     r4 = trace4,
                     r5 = trace5,
                     theta = theta,
+                    title=title
                 )
 
     return fig
@@ -3554,7 +3574,7 @@ def open_crop(n, is_open):
      State('5soil10', 'value'),],
     prevent_initial_call=True
 )
-def add_analise (n, 
+def add_analise (n,
         soil_name1, soil_1_1, soil_1_2, soil_1_3, soil_1_4, soil_1_5, soil_1_6,
             soil_1_7, soil_1_8, soil_1_9, soil_1_10,
 
@@ -3585,12 +3605,14 @@ def add_analise (n,
     theta = ["Estrutura", "Compactação e infiltração", "Produndidade do solo",
               "Estado dos resíduos", "Cor, cheiro e matéria orgânica", "Retenção da umidade",
                "Desenvolvimento de raízes", "Cobertura do solo", "Erosão", "Atividade biológica"]
+    title = "Qualidade do solo"
 
     if soil_name2 == None and soil_name3 == None and soil_name4 == None and soil_name5 == None:
         fig = radar_chart(
                     name1 = soil_name1, 
                     r1 = trace1,
                     theta = theta,
+                    title=title
                 ) 
     elif soil_name3 == None  and soil_name4 == None and soil_name5 == None: 
         fig = radar_chart(
@@ -3599,6 +3621,7 @@ def add_analise (n,
                     r1 = trace1,
                     r2 = trace2,
                     theta = theta,
+                    title=title
                 ) 
     elif soil_name4 == None and soil_name5 == None:
         fig = radar_chart(
@@ -3609,6 +3632,7 @@ def add_analise (n,
                     r2 = trace2,
                     r3 = trace3,
                     theta = theta,
+                    title=title
                 )   
 
     elif soil_name5 == None:
@@ -3622,6 +3646,7 @@ def add_analise (n,
                     r3 = trace3,
                     r4 = trace4,
                     theta = theta,
+                    title=title
                 )
     else:
         fig = radar_chart(
@@ -3636,6 +3661,7 @@ def add_analise (n,
                     r4 = trace4,
                     r5 = trace5,
                     theta = theta,
+                    title=title
                 )
 
     return fig
