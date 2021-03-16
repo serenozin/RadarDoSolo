@@ -458,7 +458,7 @@ app.layout = html.Div(
                                                                                     ALTIERI, 2002. Também tem como referência 
                                                                                     outra publicação com a mesma dupla e outros
                                                                                      autores, de 2004, onde adaptaram o método
-                                                                                     para vinhedos. Adionaram alguns indicadores
+                                                                                     para vinhedos. Adicionaram alguns indicadores
                                                                                      no lugar de outros, como indidência de
                                                                                      insetos "pragas" e a diversidade de seus
                                                                                      predadores. E a ideia é essa, sempre
