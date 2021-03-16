@@ -3,7 +3,6 @@ import dash_html_components as html
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
-# from datetime import datetime as dt
 import plotly.graph_objects as go
 
 #-----------------------------------TABELAS-----------------------------------------------------------------------------
@@ -2455,17 +2454,6 @@ app.layout = html.Div(
                                                             ]
                                                         ),
                                                     ),
-                                                    dbc.Collapse(
-                                                        dbc.Card(
-                                                            dbc.CardBody(
-                                                                [
-                                                                    dcc.Graph(
-                                                                        id='figure2-new'),
-                                                                ],
-                                                            ),
-                                                        ),
-                                                        id='new-radar2'
-                                                    ),
                                                 ],
                                                 id='maked2-method'
                                             ),
@@ -2613,18 +2601,6 @@ app.layout = html.Div(
                                                                 ),
                                                             ]
                                                         ),
-                                                    ),
-                                                    # RADAR 3
-                                                    dbc.Collapse(
-                                                        dbc.Card(
-                                                            dbc.CardBody(
-                                                                [
-                                                                    dcc.Graph(
-                                                                        id='figure3-new'),
-                                                                ],
-                                                            ),
-                                                        ),
-                                                        id='new-radar3'
                                                     ),
                                                 ],
                                                 id='maked3-method'
@@ -2961,14 +2937,14 @@ app.layout = html.Div(
                         dbc.CardBody(
                             [
 
-                                html.H6('Apoie o Radar do Solo: '),
-                                dbc.Badge("Apoia.se", href="#", color="primary"),
-                                html.P(''),
+                                # html.H6('Apoie o Radar do Solo: '),
+                                # dbc.Badge("Apoia.se", href="#", color="primary"),
+                                # html.P(''),
                                 html.H6('Colabore no código do projeto: '),
                                 dbc.Badge("GitHub", href="https://github.com/serenozin/RadarDoSolo", color="primary"),
                                 html.P(''),
                                 html.H6('Desenvolvido por Patryck Harley'),
-                                dbc.Badge('patryck@outlook.com', color='primary'),
+                                dbc.Badge('patryck@outlook.com', href="mailto:patryck@outlook.com", color='primary'),
 
                             ]
                         ),
