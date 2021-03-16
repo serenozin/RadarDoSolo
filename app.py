@@ -2983,17 +2983,7 @@ app.layout = html.Div(
 #--------------------------------------------------------------------COLLAPSE CALLBACKS---------------------------------
 
 #----------------------------CUSTOM METHOD------------------------------------------------------------------------------
-# INPUT 0
-@app.callback(
-    Output('new-method', 'is_open'),
-    [Input("new-method-button", "n_clicks")],
-    [State("new-method", "is_open")],
-    prevent_initial_call=True
-)
-def open_new_method(n, is_open):
-    if n:
-        return not is_open
-    return is_open
+
 
 # INPUT 1
 @app.callback(
@@ -3206,29 +3196,75 @@ def custom_radar_graph (n, title, name1, ind11, ind21, ind31, ind41, ind51, ind6
 
 #-----------------------------------------------METHODS-----------------------------------------------------------------
 # SHOW METHODS
-@app.callback(
-    Output('methods', 'is_open'),
-    [Input("methods-button", "n_clicks")],
-    [State("methods", "is_open")],
-    prevent_initial_call=True
-)
-def open_methods(n, is_open):
-    if n:
-        return not is_open
-    return is_open
+############################################################################
 
-# SHOW SOIL SUSTENTABILITY INFOS
 @app.callback(
-    Output('info-nicholls-altieri', 'is_open'),
-    [Input("info-button", "n_clicks")],
-    [State("info-nicholls-altieri", "is_open")],
-    prevent_initial_call=True
+    [
+        Output('methods', 'is_open'),
+        Output('new-method', 'is_open'),
+    ],
+    [
+        Input("methods-button", "n_clicks"),
+        Input("new-method-button", "n_clicks"),
+    ],
+    [
+        State('methods', 'is_open'),
+        State('new-method', 'is_open'),
+    ],
 )
-def open_methods(n, is_open):
-    if n:
-        return not is_open
-    return is_open
+def initial_menu(n1, n2, is_open1, is_open2):
+    """Controle da abertura/ fechamento dos collapses do menu inicial"""
+    ctx = dash.callback_context
 
+    if not ctx.triggered:
+        return False, False
+    else:
+        button_id = ctx.triggered[0]["prop_id"].split(".")[0]
+
+    if button_id == "methods-button" and n1:
+        return not is_open1, False
+
+    elif button_id == "new-method-button" and n2:
+        return False, not is_open2
+    return False, False
+
+@app.callback(
+    [
+        Output("nichols-altieri-soil", "is_open"),
+        Output("nichols-altieri-crop", "is_open"),
+        Output("info-nicholls-altieri", "is_open"),
+    ],
+    [
+        Input("soil", 'n_clicks'),
+        Input("crop", 'n_clicks'),
+        Input("info-button", 'n_clicks'),
+    ],
+    [
+        State("nichols-altieri-soil", "is_open"),
+        State("nichols-altieri-crop", "is_open"),
+        State("info-nicholls-altieri", "is_open"),
+    ],
+)
+def methods_menu(n1, n2, n3, is_open1, is_open2, is_open3):
+    ctx = dash.callback_context
+
+    if not ctx.triggered:
+        return False, False, False
+    else:
+        button_id = ctx.triggered[0]["prop_id"].split(".")[0]
+
+    if button_id == "soil" and n1:
+        return not is_open1, False, False
+
+    elif button_id == "crop" and n2:
+        return False, not is_open2, False
+    
+    elif button_id == "info-button" and n3:
+        return False, False, not is_open3
+
+    return False, False, False
+
+# 
 #----------------------------SAÚDE DA COLHEITA--------------------------------------------------------------------------
 # MANUAL
 @app.callback(
@@ -3242,17 +3278,41 @@ def open_soil_table(n, is_open):
         return not is_open
     return is_open
 
-# INPUT 1
-@app.callback(
-    Output('nichols-altieri-crop', 'is_open'),
-    [Input("crop", "n_clicks")],
-    [State("nichols-altieri-crop", "is_open")],
-    prevent_initial_call=True
-)
-def open_crop(n, is_open):
-    if n:
-        return not is_open
-    return is_open
+# # INPUT 1
+# @app.callback(
+#     Output('nichols-altieri-crop', 'is_open'),
+#     [Input("crop", "n_clicks")],
+#     [State("nichols-altieri-crop", "is_open")],
+#     prevent_initial_call=True
+# )
+# def open_crop(n, is_open):
+#     if n:
+#         return not is_open
+#     return is_open
+
+# SHOW SOIL SUSTENTABILITY INFOS
+# @app.callback(
+#     Output('info-nicholls-altieri', 'is_open'),
+#     [Input("info-button", "n_clicks")],
+#     [State("info-nicholls-altieri", "is_open")],
+#     prevent_initial_call=True
+# )
+# def open_methods(n, is_open):
+#     if n:
+#         return not is_open
+#     return is_open
+
+# # INPUT 1
+# @app.callback(
+#     Output('nichols-altieri-soil', 'is_open'),
+#     [Input("soil", "n_clicks")],
+#     [State("nichols-altieri-soil", "is_open")],
+#     prevent_initial_call=True
+# )
+# def open_soil(n, is_open):
+#     if n:
+#         return not is_open
+#     return is_open
 
 # INPUT 2
 @app.callback(
@@ -3453,17 +3513,7 @@ def open_soil_table(n, is_open):
         return not is_open
     return is_open
 
-# INPUT 1
-@app.callback(
-    Output('nichols-altieri-soil', 'is_open'),
-    [Input("soil", "n_clicks")],
-    [State("nichols-altieri-soil", "is_open")],
-    prevent_initial_call=True
-)
-def open_soil(n, is_open):
-    if n:
-        return not is_open
-    return is_open
+
 
 # INPUT 2
 @app.callback(
