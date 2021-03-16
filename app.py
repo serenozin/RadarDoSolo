@@ -1373,7 +1373,7 @@ app.layout = html.Div(
                                                                 'Dê um nome para a análise:'
                                                             ),
                                                             dbc.Input(
-                                                                id='name',
+                                                                id='1soil0',
                                                                 type='text',
                                                                 placeholder='Ex: Reforma Agrária já!'
                                                             ),
@@ -1382,7 +1382,7 @@ app.layout = html.Div(
                                                             html.Div(indicadores[0]
                                                                      ),
                                                             dbc.Input(
-                                                                id='ind1',
+                                                                id='1soil1',
                                                                 placeholder='de 1 à 10',
                                                                 type='number',
                                                                 max=10,
@@ -1393,7 +1393,7 @@ app.layout = html.Div(
                                                             html.Div(indicadores[1]
                                                                      ),
                                                             dbc.Input(
-                                                                id='ind2',
+                                                                id='1soil2',
                                                                 placeholder='de 1 à 10',
                                                                 type='number',
                                                                 max=10,
@@ -1404,7 +1404,7 @@ app.layout = html.Div(
                                                             html.Div(indicadores[2]
                                                                      ),
                                                             dbc.Input(
-                                                                id='ind3',
+                                                                id='1soil3',
                                                                 placeholder='de 1 à 10',
                                                                 type='number',
                                                                 max=10,
@@ -1415,7 +1415,7 @@ app.layout = html.Div(
                                                             html.Div(indicadores[3]
                                                                      ),
                                                             dbc.Input(
-                                                                id='ind4',
+                                                                id='1soil4',
                                                                 placeholder='de 1 à 10',
                                                                 type='number',
                                                                 max=10,
@@ -1426,7 +1426,7 @@ app.layout = html.Div(
                                                             html.Div(indicadores[4]
                                                                      ),
                                                             dbc.Input(
-                                                                id='ind5',
+                                                                id='1soil5',
                                                                 placeholder='de 1 à 10',
                                                                 type='number',
                                                                 max=10,
@@ -1437,7 +1437,7 @@ app.layout = html.Div(
                                                             html.Div(indicadores[5]
                                                                      ),
                                                             dbc.Input(
-                                                                id='ind6',
+                                                                id='1soil6',
                                                                 placeholder='de 1 à 10',
                                                                 type='number',
                                                                 max=10,
@@ -1448,7 +1448,7 @@ app.layout = html.Div(
                                                             html.Div(indicadores[6]
                                                                      ),
                                                             dbc.Input(
-                                                                id='ind7',
+                                                                id='1soil7',
                                                                 placeholder='de 1 à 10',
                                                                 type='number',
                                                                 max=10,
@@ -1459,7 +1459,7 @@ app.layout = html.Div(
                                                             html.Div(indicadores[7]
                                                                      ),
                                                             dbc.Input(
-                                                                id='ind8',
+                                                                id='1soil8',
                                                                 placeholder='de 1 à 10',
                                                                 type='number',
                                                                 max=10,
@@ -1470,7 +1470,7 @@ app.layout = html.Div(
                                                             html.Div(indicadores[8]
                                                                      ),
                                                             dbc.Input(
-                                                                id='ind9',
+                                                                id='1soil9',
                                                                 placeholder='de 1 à 10',
                                                                 type='number',
                                                                 max=10,
@@ -1481,7 +1481,7 @@ app.layout = html.Div(
                                                             html.Div(indicadores[9]
                                                                      ),
                                                             dbc.Input(
-                                                                id='ind10',
+                                                                id='1soil10',
                                                                 placeholder='de 1 à 10',
                                                                 type='number',
                                                                 max=10,
@@ -1515,7 +1515,7 @@ app.layout = html.Div(
                                                                         'Dê um nome para a análise:'
                                                                     ),
                                                                     dbc.Input(
-                                                                        id='name-soil2',
+                                                                        id='2soil0',
                                                                         type='text',
                                                                         placeholder='Ex: Sem Feminismo não há agroecologia!!'
                                                                     ),
@@ -1524,7 +1524,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[0]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil10',
+                                                                        id='2soil1',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1535,7 +1535,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[1]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil20',
+                                                                        id='2soil2',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1546,7 +1546,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[2]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil30',
+                                                                        id='2soil3',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1557,7 +1557,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[3]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil40',
+                                                                        id='2soil4',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1568,7 +1568,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[4]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil50',
+                                                                        id='2soil5',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1579,7 +1579,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[5]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil60',
+                                                                        id='2soil6',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1590,7 +1590,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[6]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil70',
+                                                                        id='2soil7',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1601,7 +1601,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[7]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil80',
+                                                                        id='2soil8',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1612,7 +1612,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[8]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil90',
+                                                                        id='2soil9',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1623,7 +1623,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[9]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil100',
+                                                                        id='2soil10',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1672,7 +1672,7 @@ app.layout = html.Div(
                                                                         'Dê um nome para a análise:'
                                                                     ),
                                                                     dbc.Input(
-                                                                        id='name-soil3',
+                                                                        id='3soil0',
                                                                         type='text',
                                                                         placeholder='Ex: Sem Feminismo não há agroecologia!!'
                                                                     ),
@@ -1692,7 +1692,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[1]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil200',
+                                                                        id='3soil2',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1703,7 +1703,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[2]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil300',
+                                                                        id='3soil3',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1714,7 +1714,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[3]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil400',
+                                                                        id='3soil4',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1725,7 +1725,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[4]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil500',
+                                                                        id='3soil5',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1736,7 +1736,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[5]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil600',
+                                                                        id='3soil6',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1747,7 +1747,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[6]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil700',
+                                                                        id='3soil7',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1758,7 +1758,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[7]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil800',
+                                                                        id='3soil8',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1769,7 +1769,7 @@ app.layout = html.Div(
                                                                     html.Div(indicadores[8]
                                                                              ),
                                                                     dbc.Input(
-                                                                        id='soil900',
+                                                                        id='3soil9',
                                                                         placeholder='de 1 à 10',
                                                                         type='number',
                                                                         max=10,
@@ -1817,7 +1817,7 @@ app.layout = html.Div(
                                                                         'Dê um nome para a análise:'
                                                                     ),
                                                                     dbc.Input(
-                                                                        id='name-soil4',
+                                                                        id='4soil0',
                                                                         type='text',
                                                                         placeholder='Ex: Sem Feminismo não há agroecologia!!'
                                                                     ),
@@ -1962,7 +1962,7 @@ app.layout = html.Div(
                                                                         'Dê um nome para a análise:'
                                                                     ),
                                                                     dbc.Input(
-                                                                        id='name-soil5',
+                                                                        id='5soil0',
                                                                         type='text',
                                                                         placeholder='Ex: Sem Feminismo não há agroecologia!!'
                                                                     ),
@@ -3278,42 +3278,6 @@ def open_soil_table(n, is_open):
         return not is_open
     return is_open
 
-# # INPUT 1
-# @app.callback(
-#     Output('nichols-altieri-crop', 'is_open'),
-#     [Input("crop", "n_clicks")],
-#     [State("nichols-altieri-crop", "is_open")],
-#     prevent_initial_call=True
-# )
-# def open_crop(n, is_open):
-#     if n:
-#         return not is_open
-#     return is_open
-
-# SHOW SOIL SUSTENTABILITY INFOS
-# @app.callback(
-#     Output('info-nicholls-altieri', 'is_open'),
-#     [Input("info-button", "n_clicks")],
-#     [State("info-nicholls-altieri", "is_open")],
-#     prevent_initial_call=True
-# )
-# def open_methods(n, is_open):
-#     if n:
-#         return not is_open
-#     return is_open
-
-# # INPUT 1
-# @app.callback(
-#     Output('nichols-altieri-soil', 'is_open'),
-#     [Input("soil", "n_clicks")],
-#     [State("nichols-altieri-soil", "is_open")],
-#     prevent_initial_call=True
-# )
-# def open_soil(n, is_open):
-#     if n:
-#         return not is_open
-#     return is_open
-
 # INPUT 2
 @app.callback(
     Output('crop-2', 'is_open'),
@@ -3563,68 +3527,19 @@ def open_crop(n, is_open):
         return not is_open
     return is_open
 
+lista_forms_soil = []    
+for i in range(1, 6):
+    for x in range(11):
+        lista_forms_soil.append(State(f'{i}soil{x}', 'value'))
+
 # SOIL RADAR OUTPUT
 @app.callback(
     Output('soil-figure', 'figure'),
     Input("show-soil-radar", "n_clicks"),
-    [State('name', 'value'),
-     State('ind1', 'value'),
-     State('ind2', 'value'),
-     State('ind3', 'value'),
-     State('ind4', 'value'),
-     State('ind5', 'value'),
-     State('ind6', 'value'),
-     State('ind7', 'value'),
-     State('ind8', 'value'),
-     State('ind9', 'value'),
-     State('ind10', 'value'),
-     State('name-soil2', 'value'),
-     State('soil10', 'value'),
-     State('soil20', 'value'),
-     State('soil30', 'value'),
-     State('soil40', 'value'),
-     State('soil50', 'value'),
-     State('soil60', 'value'),
-     State('soil70', 'value'),
-     State('soil80', 'value'),
-     State('soil90', 'value'),
-     State('soil100', 'value'),
-     State('name-soil3', 'value'),
-     State('3soil1', 'value'),
-     State('soil200', 'value'),
-     State('soil300', 'value'),
-     State('soil400', 'value'),
-     State('soil500', 'value'),
-     State('soil600', 'value'),
-     State('soil700', 'value'),
-     State('soil800', 'value'),
-     State('soil900', 'value'),
-     State('3soil10', 'value'),
-     State('name-soil4', 'value'),
-     State('4soil1', 'value'),
-     State('4soil2', 'value'),
-     State('4soil3', 'value'),
-     State('4soil4', 'value'),
-     State('4soil5', 'value'),
-     State('4soil6', 'value'),
-     State('4soil7', 'value'),
-     State('4soil8', 'value'),
-     State('4soil9', 'value'),
-     State('4soil10', 'value'),
-     State('name-soil5', 'value'),
-     State('5soil1', 'value'),
-     State('5soil2', 'value'),
-     State('5soil3', 'value'),
-     State('5soil4', 'value'),
-     State('5soil5', 'value'),
-     State('5soil6', 'value'),
-     State('5soil7', 'value'),
-     State('5soil8', 'value'),
-     State('5soil9', 'value'),
-     State('5soil10', 'value'),],
+    lista_forms_soil,
     prevent_initial_call=True
 )
-def add_analise (n,
+def add_analise(n,
         soil_name1, soil_1_1, soil_1_2, soil_1_3, soil_1_4, soil_1_5, soil_1_6,
             soil_1_7, soil_1_8, soil_1_9, soil_1_10,
 
