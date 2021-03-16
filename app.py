@@ -347,20 +347,32 @@ app = dash.Dash(
 )
 server = app.server
 
+navbar = dbc.Navbar(
+    [
+        
+            # Use row and col to control vertical alignment of logo / brand
+            dbc.Row(
+                [
+                dbc.Col(
+                    html.Img(
+                        src="https://github.com/serenozin/RadarDoSolo/blob/master/assets/favicon.ico?raw=true", 
+                        height="35px"
+                    ),
+                ),
+                dbc.Col(dbc.NavbarBrand("RADAR DO SOLO")),
+                ],
+                align="center",
+            ),
+    ],
+    color="info",
+    dark=True,
+    sticky="top"
+)
 # Define the app
 app.layout = html.Div(
     [
 #-------NAVBAR----------------------------------------------------------------------------------------------------------
-        dbc.NavbarSimple(
-            [
-
-            ],
-            sticky='top',
-            brand='RADAR DO SOLO',
-            color="info",
-            dark=True,
-
-        ),
+        navbar,
 
         dbc.Row(html.P()),
         dbc.Row(
